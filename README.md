@@ -25,7 +25,7 @@ View = (function(props) {
 ```
 
 //Returning a ViewComponent with lots of powers:
-ViewComponent = React.createComponent({
+ViewComponent = React.createClass({
 	render() {
 		return <View />
 	}
@@ -37,3 +37,56 @@ ViewComponent = React.createComponent({
 - Classical Way (ES5 way)
 - Classy Way (ES6 way)
 - Functional Way (Stateless Components)
+
+### Classical Way example
+
+```
+
+ViewComponent = React.createClass({
+	method() {
+		...
+	},
+	...,
+	render() {
+		return <View />
+	}
+});
+
+```
+
+### Classy Way example
+
+```
+
+class ViewComponent extends React.Component {
+	method() {
+		...
+	}
+	render() {
+		return <View />
+	}
+}
+
+```
+
+
+### Function Way example
+
+```
+
+ViewComponent = function (props){
+	return <View />
+};
+
+```
+
+## Stateless Component
+- Takes data/props as input
+- Renders it to view
+- Don't own data
+
+## Stateful Component
+- Contains of data
+- Manages data with methods
+- Passes data/methods to children components
+- Owns data

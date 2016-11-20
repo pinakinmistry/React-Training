@@ -14,15 +14,22 @@
 ## Functional View
 
 ```
+
 View = function(props) {
 	return <View />
 }
+
+```
+
+```
 
 ViewComponent = React.createComponent({
 	render() {
 		return <View />
 	}
 });
+
+````
 
 ## 3 Ways of Creating React Components:
 - Classical Way (ES5 way)

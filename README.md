@@ -15,14 +15,16 @@
 
 ```
 
-View = function(props) {
+//Function returning just a view with no other power:
+View = (function(props) {
 	return <View />
-}
+})();
 
 ```
 
 ```
 
+//Returning a ViewComponent with lots of powers:
 ViewComponent = React.createComponent({
 	render() {
 		return <View />

@@ -11,6 +11,8 @@
 
 ## How it works?
 
+## Why React? Why is it Awesome?
+
 ## Functional View
 
 ```
@@ -70,7 +72,7 @@ class ViewComponent extends React.Component {
 ```
 
 
-### Function Way example
+### Functional Way example
 
 ```
 

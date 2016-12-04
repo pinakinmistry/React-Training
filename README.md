@@ -342,7 +342,7 @@ const App = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<h1>{this.props.heading}</h1>
+				<h1>{this.props.header}</h1>
 				<input value={this.props.input} />
 			</div>
 		)
@@ -387,7 +387,7 @@ const App = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<h1>{this.props.heading}</h1>
+				<h1>{this.props.header}</h1>
 				<input value={this.state.input} />
 			</div>
 		)
@@ -412,7 +412,7 @@ const App = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<h1>{this.props.heading}</h1>
+				<h1>{this.props.header}</h1>
 				<input
 					value={this.state.input} 
 					onChange={this.onChangeHandler}
@@ -441,7 +441,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>{this.props.heading}</h1>
+				<h1>{this.props.header}</h1>
 				<input
 					value={this.state.input} 
 					onChange={this.onChangeHandler.bind(this)}

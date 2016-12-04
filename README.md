@@ -275,7 +275,6 @@ ReactDOM.render(<App header="Dynamic Header"/>, document.getElementById('app'))
 ```js
 import React from 'react'
 
-//Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
 		return <h1>{this.props.header}</h1>
@@ -285,12 +284,13 @@ const App = React.createClass({
 export default App
 ```
 
+> Note: `{}` is used to interleave/invoke JavaScript expression within JSX
+
 ## Props Validation
 #### App.js
 ```js
 import React from 'react'
 
-//Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
 		return <h1>{this.props.header}</h1>
@@ -310,10 +310,9 @@ export default App
 ```js
 import React from 'react'
 
-//Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
-		return <h1>{this.props.heading}</h1>
+		return <h1>{this.props.header}</h1>
 	}
 })
 
@@ -324,8 +323,129 @@ App.defaultProps = {
 export default App
 ```
 
+## Handling User Input
 
+#### main.js
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
+ReactDOM.render(<App header="Dynamic Header" input="Enter text"/>, document.getElementById('app'))
+```
+
+#### App.js
+```js
+import React from 'react'
+
+const App = React.createClass({
+	render: function () {
+		return (
+			<div>
+				<h1>{this.props.heading}</h1>
+				<input value={this.props.input} />
+			</div>
+		)
+	}
+})
+
+export default App
+```
+
+## Props are input and can't be changed within component
+- No two way data flow
+- Even DOM doesn't have control over view values
+- Change in value should go through `render` method
+- But props can't change
+
+##Let's have some state
+- Component can have its own data in `state` property
+- Component gets its state using `getInitialState` method
+- state can undergo changes but can't be mutated (Once set, can't be reassigned later)
+- Component should manage change in its state using its methods
+
+#### main.js
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+//Don't pass input as its no more a prop
+ReactDOM.render(<App header="Dynamic Header" />, document.getElementById('app'))
+```
+
+#### App.js
+```js
+import React from 'react'
+
+const App = React.createClass({
+	getInitialState: function() {
+		return {
+			input: 'Enter text'
+		}
+	},
+	render: function () {
+		return (
+			<div>
+				<h1>{this.props.heading}</h1>
+				<input value={this.state.input} />
+			</div>
+		)
+	}
+})
+
+### Handle user input using onChange event
+```js
+import React from 'react'
+
+const App = React.createClass({
+	getInitialState: function() {
+		return {
+			input: 'Enter text'
+		}
+	},
+	onChangeHandler: function(e) {
+		this.setState({ input: e.target.value })
+	},
+	render: function () {
+		return (
+			<div>
+				<h1>{this.props.heading}</h1>
+				<input
+					value={this.state.input} 
+					onChange={this.onChangeHandler}
+				/>
+			</div>
+		)
+	}
+})
+
+## Setting up state is Classy Component
+```js
+import React from 'react'
+
+class App extends React.Component {
+	constructor() {
+		super()
+		this.state = {
+			input: 'Enter text'
+		}
+	}
+	onChangeHandler(e) {
+		this.setState({ input: e.target.value })
+	}
+	render() {
+		return (
+			<div>
+				<h1>{this.props.heading}</h1>
+				<input
+					value={this.state.input} 
+					onChange={this.onChangeHandler.bind(this)}
+				/>
+			</div>
+		)
+	}
+}
 
 
 ## MultiSelect Dropdown Component

@@ -393,8 +393,10 @@ const App = React.createClass({
 		)
 	}
 })
+```
 
-### Handle user input using onChange event
+### Handle user input using `onChange` event
+#### App.js
 ```js
 import React from 'react'
 
@@ -421,6 +423,7 @@ const App = React.createClass({
 })
 
 ## Setting up state is Classy Component
+#### App.js
 ```js
 import React from 'react'
 

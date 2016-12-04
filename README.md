@@ -60,7 +60,7 @@ ViewComponent = React.createClass({
 });
 ````
 
-### NOTE: simple function or `render` method returning a view
+### NOTE: simple function or `render` method is returning a view
 
 ## 3 Ways of Creating React Components:
 - Classical way (ES5 way)
@@ -259,7 +259,74 @@ const App = () => React.createElement('h1', props, 'React Node/Element')
 
 ## Hardcoded Components No Fun - Pass Data and Actions
 - Nothing should be set in stone
-- Pass data using props
+- Pass data/actions as properties on component just like normal HTML attributes
+- The passed properties are accessible in `this.props` inside of component
+
+#### main.js
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App header="Dynamic Header"/>, document.getElementById('app'))
+```
+
+#### App.js
+```js
+import React from 'react'
+
+//Component name should start with capital letter 
+const App = React.createClass({
+	render: function () {
+		return <h1>{`this.props`.header}</h1>
+	}
+})
+
+export default App
+```
+
+### Props Validation
+#### App.js
+```js
+import React from 'react'
+
+//Component name should start with capital letter 
+const App = React.createClass({
+	render: function () {
+		return <h1>{this.props.header}</h1>
+	}
+})
+
+`App.propTypes` = {
+	header: React.PropTypes.string,
+	body: React.PropTypes.number.isRequired
+}
+
+export default App
+```
+
+### Default Props
+#### App.js
+```js
+import React from 'react'
+
+//Component name should start with capital letter 
+const App = React.createClass({
+	render: function () {
+		return <h1>{this.props.heading}</h1>
+	}
+})
+
+`App.defaultProps` = {
+	header: 'Default Header'
+}
+
+export default App
+```
+
+
+
+
 
 ## MultiSelect Dropdown Component
 

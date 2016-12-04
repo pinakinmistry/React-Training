@@ -31,14 +31,15 @@
 
 ### Why React? Why is it Awesome?
 - Radically different way of writing view/client side App
-- Logic is packed in component and easy to reason about and debug
+- Makes views lot more powerful, interesting and irresistable to 'React' to ;-)
+- Everything packed into logical components is easy to reason about and debug
 - Learn once, write anywhere (React Native for native apps)
-- Super Fast
+- Learn once, forget everything else ;-)
+- Super Fast and Fun
 
 ### Look Ma, who all are using it:
 - Facebook, Instagram
 - Netflix
-
 (2 names are enough)
 
 ## Functional View
@@ -177,7 +178,7 @@ import React from 'react'
 //Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
-		return <div>My First React Component</div>
+		return <h1>My First React Component</h1>
 	}
 })
 
@@ -216,8 +217,8 @@ npm start
 import React from 'react'
 
 class App extents React.Component {
-	render () {
-		return <div>My First React Component</div>
+	render() {
+		return <h1>My First React Component</h1>
 	}
 }
 
@@ -227,7 +228,7 @@ export default App
 ```js
 //Functional way
 
-const App = () => <div>My First React Component</div>
+const App = () => <h1>My First React Component</h1>
 
 export default App
 ```
@@ -243,7 +244,16 @@ input => whatever		//Single input with optional () before =>
 input => {body}			//body with statements with/without a return output
 ```
 
-## Hardcoding no Fun - Pass Data and Actions
+## What is JSX? Why use it?
+- JSX is JavaScript Syntax eXtension
+- Easier way of creating HTML nodes/elements in JavaScript
+- Requires Babel to convert JSX code to JavaScript that browsers understand
+- Without JSX, we have to write React code this way
+```js
+const App = () => React.createElement('h1', props, 'React Node/Element')
+```
+
+## Hardcoded Components No Fun - Pass Data and Actions
 - Nothing should be set in stone
 - Pass data using props
 

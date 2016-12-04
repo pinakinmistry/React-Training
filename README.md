@@ -7,7 +7,7 @@
 
 ### What is React?
 - A JavaScript library for building user interface 
-- HTML is written in JavaScript without using HTML
+- HTML is written in JavaScript without using HTML ;-)
 - Declarative
 - Functional
 - Component based
@@ -34,6 +34,12 @@
 - Logic is packed in component and easy to reason about and debug
 - Learn once, write anywhere (React Native for native apps)
 - Super Fast
+
+#### Look Ma, who all are using it:
+- Facebook, Instagram
+- Netflix
+
+(2 names are enough)
 
 ### Functional View
 

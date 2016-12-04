@@ -286,7 +286,9 @@ export default App
 
 > Note: `{}` is used to interleave/invoke JavaScript expression within JSX
 
-## Props Validation
+## What if `props` don't get passed?
+
+###Props Validation
 #### App.js
 ```js
 import React from 'react'
@@ -305,7 +307,7 @@ App.propTypes = {
 export default App
 ```
 
-## Default Props
+### Default Props
 #### App.js
 ```js
 import React from 'react'

@@ -233,9 +233,13 @@ export default App
 ```
 
 ## ES6 fat arrow function variants:
-### () => ... 				//Single line output
-### (inputs) => (output)	//Multi line output
-### input => {body}			//body with statements with/without a return output
+```js
+() => ... 				//Single line output
+
+(inputs) => (output)	//Multi line output
+
+input => {body}			//body with statements with/without a return output
+```
 
 ## Hardcoding no Fun - Pass Data and Actions
 - Nothing should be set in stone

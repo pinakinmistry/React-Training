@@ -54,11 +54,11 @@ ViewComponent = React.createClass({
 ````
 
 ## 3 Ways of Creating React Components:
-- Classical Way (ES5 way)
-- Classy Way (ES6 way)
-- Functional Way (Stateless Components)
+- Classical way (ES5 way)
+- Classy way (ES6 way)
+- Functional way (Stateless Components)
 
-### Classical Way example
+### Classical way example
 
 ```
 ViewComponent = React.createClass({
@@ -72,7 +72,7 @@ ViewComponent = React.createClass({
 });
 ```
 
-### Classy Way example
+### Classy way example
 
 ```
 class ViewComponent extends React.Component {
@@ -86,7 +86,7 @@ class ViewComponent extends React.Component {
 ```
 
 
-### Functional Way example
+### Functional way example
 
 ```
 ViewComponent = function (){

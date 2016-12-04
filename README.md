@@ -42,7 +42,6 @@
 View = (function(props) {
 	return <View />
 })();
-
 ```
 
 ```
@@ -52,7 +51,6 @@ ViewComponent = React.createClass({
 		return <View />
 	}
 });
-
 ````
 
 ## 3 Ways of Creating React Components:

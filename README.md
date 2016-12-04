@@ -19,9 +19,9 @@
 - Controller ??? (Component controls itself)
 - It outsources client side routing to npm package `react-router`
 - It outsources model/state management to npm packages like `react-redux`, `flux`, etc.
+- MVC in View is not appropriate.
 
 ### How it works?
-- MVC in View is not appropriate.
 - Views are written in form of JavaScript functions
 - User interface and user interaction are written declaratively in form of components
 - App then becomes a tree of components and sub components

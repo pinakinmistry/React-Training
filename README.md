@@ -39,7 +39,7 @@
 
 ```
 //Function returning just a view with no other power:
-View = (function(props) {
+ViewComponent = (function(props) {
 	return <View />
 })();
 ```

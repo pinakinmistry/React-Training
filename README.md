@@ -35,7 +35,7 @@
 - Learn once, write anywhere (React Native for native apps)
 - Super Fast
 
-#### Look Ma, who all are using it:
+### Look Ma, who all are using it:
 - Facebook, Instagram
 - Netflix
 

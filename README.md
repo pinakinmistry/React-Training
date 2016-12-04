@@ -371,7 +371,7 @@ const App = React.createClass({
 export default App
 ```
 
-## Props are input and can't be changed within component
+## `props` are input and can't be changed within component
 - No two way data flow
 - Even DOM doesn't have control over view values
 - Change in value should go through `render` method
@@ -477,7 +477,7 @@ class App extends React.Component {
 export default App
 ```
 
-## State vs Props
+## `state` vs `props`
 
 
 ## Composition of Components

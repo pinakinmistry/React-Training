@@ -42,7 +42,7 @@
 - Facebook, Instagram
 - Netflix
 
-> (2 names are enough)
+> 2 names are enough
 
 ## Functional View
 
@@ -288,7 +288,7 @@ export default App
 
 > Note: `{}` is used to interleave/invoke JavaScript expression within JSX
 
-## What if `props` don't get passed?
+## What if `props` are not passed?
 
 ###Props Validation
 #### App.js

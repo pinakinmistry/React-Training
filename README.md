@@ -238,6 +238,8 @@ export default App
 
 (inputs) => (output)	//Multi line output
 
+input => whatever		//Single input with optional () before =>
+
 input => {body}			//body with statements with/without a return output
 ```
 

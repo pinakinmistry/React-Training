@@ -292,7 +292,7 @@ export default App
 
 > Note: `{}` is used to interleave/invoke JavaScript expression within JSX
 
-## 'props' are received as input to functional/stateless components:
+## `props` are received as input to functional/stateless components:
 
 #### App.js ()
 ```js

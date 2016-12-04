@@ -423,7 +423,7 @@ const App = React.createClass({
 })
 ```
 
-## Setting up state is Classy Component
+## Setting up `state` is Classy Component
 #### App.js
 ```js
 import React from 'react'
@@ -450,7 +450,7 @@ class App extends React.Component {
 		)
 	}
 }
-
+```
 
 ## MultiSelect Dropdown Component
 

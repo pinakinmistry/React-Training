@@ -174,7 +174,7 @@ module.export = {
 ```js
 import React from 'react'
 
-//Component name should start with capital letter for JSX to work 
+//Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
 		return <div>My First React Component</div>
@@ -203,7 +203,43 @@ ReactDOM.render(<App />, document.getElementById('app'))
 }
 ```
 
-## No Hardcoding - Nothing is set in stone.
+#### Start the application
+```
+npm start
+```
+
+### Exercise: Classy and Functional way of creating components
+
+#### App.js
+```js
+//Classy way
+import React from 'react'
+
+class App extents React.Component {
+	render () {
+		return <div>My First React Component</div>
+	}
+}
+
+export default App
+```
+
+```js
+//Functional way
+
+const App = () => <div>My First React Component</div>
+
+export default App
+```
+
+### ES6 fat arrow function:
+### () => ()
+
+## Hardcoding no Fun - Pass Data and Actions
+- Nothing should be set in stone
+- Pass data using props
+
+## MultiSelect Dropdown Component
 
 ## Passing data using props
 

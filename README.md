@@ -174,6 +174,7 @@ module.export = {
 ```js
 import React from 'react'
 
+//Component name should start with capital letter for JSX to work 
 const App = React.createClass({
 	render: function () {
 		return <div>My First React Component</div>

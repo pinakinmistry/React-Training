@@ -16,7 +16,7 @@
 ### What it's not?
 - Not a framework
 - Doesn't cover anything other than view, not even model or routing
-- Controller ???
+- Controller ??? (Component controls itself)
 
 ### MVC in View is not appropriate.
 
@@ -176,7 +176,7 @@ import React from 'react'
 
 const App = React.createClass({
 	render: function () {
-		return <div>Hello World</div>
+		return <div>My First React Component</div>
 	}
 })
 

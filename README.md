@@ -397,6 +397,8 @@ const App = React.createClass({
 		)
 	}
 })
+
+export default App
 ```
 
 ### Handle user input using `onChange` event
@@ -425,6 +427,8 @@ const App = React.createClass({
 		)
 	}
 })
+
+export default App
 ```
 
 ## Setting up `state` is Classy Component
@@ -454,6 +458,8 @@ class App extends React.Component {
 		)
 	}
 }
+
+export default App
 ```
 
 ## MultiSelect Dropdown Component

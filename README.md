@@ -358,7 +358,7 @@ export default App
 - Change in value should go through `render` method
 - But props can't change
 
-##Let's have some state
+##Let's use `state` to handle change
 - Component can have its own data in `state` property
 - Component gets its state using `getInitialState` method
 - state can undergo changes but can't be mutated (Once set, can't be reassigned later)

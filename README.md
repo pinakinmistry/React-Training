@@ -38,11 +38,11 @@
 - Learn once, forget everything else ;-)
 - Super Fast and Fun
 
-### Look Ma, who all are using it:
+### Look Ma, who all are using React:
 - Facebook, Instagram
 - Netflix
 
-(2 names are enough)
+> (2 names are enough)
 
 ## Functional View
 

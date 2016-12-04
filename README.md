@@ -48,7 +48,7 @@
 
 ```js
 //Function returning just a view with no other power:
-ViewComponent = (function(props) {
+ViewComponent = (function() {
 	return <View />
 })();
 ```
@@ -72,6 +72,8 @@ ViewComponent = React.createClass({
 ### Classical way example
 
 ```js
+import React from 'react'
+
 ViewComponent = React.createClass({
 	method: function() {
 		...
@@ -86,6 +88,8 @@ ViewComponent = React.createClass({
 ### Classy way example
 
 ```js
+import React from 'react'
+
 class ViewComponent extends React.Component {
 	method() {
 		...
@@ -288,6 +292,17 @@ export default App
 
 > Note: `{}` is used to interleave/invoke JavaScript expression within JSX
 
+## 'props' are received as input to functional/stateless components:
+
+#### App.js ()
+```js
+const App = function(props) {
+	return <h1>{props.header}</h1>
+}
+
+export default App
+```
+
 ## What if `props` are not passed?
 
 ###Props Validation
@@ -462,10 +477,14 @@ class App extends React.Component {
 export default App
 ```
 
+## State vs Props
+
+
 ## Composition of Components
 - React components can be nested
-- A React components should be broken down into logical sub components
+- A React component should be broken down into logical sub components
 - Child properties can be accessed using `props.children`
+
 #### App.js
 ```js
 import React from 'react'

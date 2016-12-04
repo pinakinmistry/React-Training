@@ -220,7 +220,7 @@ npm start
 //Classy way
 import React from 'react'
 
-class App extents React.Component {
+class App extends React.Component {
 	render() {
 		return <h1>My First React Component</h1>
 	}

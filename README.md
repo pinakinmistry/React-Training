@@ -462,6 +462,27 @@ class App extends React.Component {
 export default App
 ```
 
+## Composition of Components
+- React components can be nested
+- A React components should be broken down into logical sub components
+- Child properties can be accessed using `props.children`
+#### App.js
+```js
+import React from 'react'
+
+class App extends React.Component {
+	render() {
+		return <Button>I <Heart /> React</Button>
+	}
+}
+
+const Button = (props) => <button>{props.children}</button>
+
+const Heart = () => <span>&heart;</span>
+
+export default App
+```
+
 ## MultiSelect Dropdown Component
 
 ## Passing data using props

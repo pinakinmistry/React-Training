@@ -232,7 +232,7 @@ const App = () => <div>My First React Component</div>
 export default App
 ```
 
-### ES6 fat arrow function:
+## ES6 fat arrow function:
 ### () => ()
 
 ## Hardcoding no Fun - Pass Data and Actions

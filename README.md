@@ -421,6 +421,7 @@ const App = React.createClass({
 		)
 	}
 })
+```
 
 ## Setting up state is Classy Component
 #### App.js

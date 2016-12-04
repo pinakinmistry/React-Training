@@ -43,14 +43,14 @@
 
 ### Functional View
 
-```
+```js
 //Function returning just a view with no other power:
 ViewComponent = (function(props) {
 	return <View />
 })();
 ```
 
-```
+```js
 //Returning a ViewComponent with lots of powers:
 ViewComponent = React.createClass({
 	render: function() {
@@ -66,7 +66,7 @@ ViewComponent = React.createClass({
 
 ### Classical way example
 
-```
+```js
 ViewComponent = React.createClass({
 	method: function() {
 		...
@@ -80,7 +80,7 @@ ViewComponent = React.createClass({
 
 ### Classy way example
 
-```
+```js
 class ViewComponent extends React.Component {
 	method() {
 		...
@@ -94,7 +94,7 @@ class ViewComponent extends React.Component {
 
 ### Functional way example
 
-```
+```js
 ViewComponent = function() {
 	return <View />
 };
@@ -129,7 +129,7 @@ npm i -g babel-core babel-loader babel-preset-react babel-preset-es2015
 touch index.html App.js main.js webpack.config.js
 ```
 
-```
+```js
 //webpack.config.js
 module.export = {
 	entry: './main.js',

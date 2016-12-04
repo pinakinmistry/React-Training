@@ -257,7 +257,7 @@ input => {body}			//body with statements with/without a return output
 const App = () => React.createElement('h1', props, 'React Node/Element')
 ```
 
-## Hardcoded Components No Fun - Pass Data and Actions
+## Hardcoded Components No Fun - Pass Data and Actions using `props`
 - Nothing should be set in stone
 - Pass data/actions as properties on component just like normal HTML attributes
 - The passed properties are accessible in `this.props` inside of component

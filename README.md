@@ -47,7 +47,7 @@ ViewComponent = (function(props) {
 ```
 //Returning a ViewComponent with lots of powers:
 ViewComponent = React.createClass({
-	render() {
+	render: function() {
 		return <View />
 	}
 });
@@ -62,11 +62,11 @@ ViewComponent = React.createClass({
 
 ```
 ViewComponent = React.createClass({
-	method() {
+	method: function() {
 		...
 	},
 	...,
-	render() {
+	render: function() {
 		return <View />
 	}
 });
@@ -89,7 +89,7 @@ class ViewComponent extends React.Component {
 ### Functional way example
 
 ```
-ViewComponent = function (){
+ViewComponent = function() {
 	return <View />
 };
 ```

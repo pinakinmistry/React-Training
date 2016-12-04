@@ -129,8 +129,8 @@ npm i -g babel-core babel-loader babel-preset-react babel-preset-es2015
 touch index.html App.js main.js webpack.config.js
 ```
 
+#### webpack.config.js
 ```js
-//webpack.config.js
 module.export = {
 	entry: './main.js',
 	output: {
@@ -156,8 +156,8 @@ module.export = {
 }
 ```
 
+#### index.html
 ```html
-//index.html
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8">
@@ -170,8 +170,8 @@ module.export = {
 </html>
 ```
 
+#### App.js
 ```js
-//App.js
 import React from 'react'
 
 const App = React.createClass({
@@ -183,8 +183,8 @@ const App = React.createClass({
 export default App
 ```
 
+#### main.js
 ```js
-//main.js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -192,8 +192,8 @@ import App from './App'
 ReactDOM.render(<App />, document.getElementById('app'))
 ```
 
+#### Add scripts property in package.json to start webpack dev server
 ```js
-//Add scripts property in package.json
 {
 	...
 	"scripts" {

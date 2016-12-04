@@ -60,7 +60,7 @@ ViewComponent = React.createClass({
 });
 ````
 
-### NOTE: simple function or `render` method is returning a view
+> NOTE: simple function or `render` method is returning a view
 
 ## 3 Ways of Creating React Components:
 - Classical way (ES5 way)
@@ -103,7 +103,7 @@ ViewComponent = function() {
 };
 ```
 
-### NOTE: Once again, simple function or `render` method returns a view
+> NOTE: Once again, simple function or `render` method returns a view
 
 ## Dev Environment Setup
 
@@ -278,7 +278,7 @@ import React from 'react'
 //Component name should start with capital letter 
 const App = React.createClass({
 	render: function () {
-		return <h1>{`this.props`.header}</h1>
+		return <h1>{this.props.header}</h1>
 	}
 })
 
@@ -297,7 +297,7 @@ const App = React.createClass({
 	}
 })
 
-`App.propTypes` = {
+App.propTypes = {
 	header: React.PropTypes.string,
 	body: React.PropTypes.number.isRequired
 }
@@ -317,7 +317,7 @@ const App = React.createClass({
 	}
 })
 
-`App.defaultProps` = {
+App.defaultProps = {
 	header: 'Default Header'
 }
 

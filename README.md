@@ -30,7 +30,7 @@
 - Entire DOM interaction is handled by React
 
 ### Why React? Why is it Awesome?
-- Radically different way of writing views
+- Radically different way of writing view/client side App
 - Logic is packed in component and easy to reason about and debug
 - Learn once, write anywhere (React Native for native apps)
 - Super Fast

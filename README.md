@@ -129,6 +129,79 @@ npm i -g babel-core babel-loader babel-preset-react babel-preset-es2015
 touch index.html App.js main.js webpack.config.js
 ```
 
+```
+//webpack.config.js
+module.export = {
+	entry: './main.js',
+	output: {
+		path: './',
+		filename: 'bundle.js'
+	},
+	devServer: {
+		inline: true,
+		port: 3333
+	},
+	module: {
+		loaders: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel',
+				query: {
+					presets: ['es2015', 'react']
+				}
+			}
+		]
+	}
+}
+```
+
+```html
+//index.html
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>React Training</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="bundle.js"></script>
+</body>
+</html>
+```
+
+```js
+//App.js
+import React from 'react'
+
+const App = React.createClass({
+	render: function () {
+		return <div>Hello World</div>
+	}
+})
+
+export default App
+```
+
+```js
+//main.js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, document.getElementById('app'))
+```
+
+```js
+//Add scripts property in package.json
+{
+	...
+	"scripts" {
+		"start": "webpack-dev-server"
+	}
+}
+```
+
 ## No Hardcoding - Nothing is set in stone.
 
 ## Passing data using props

@@ -60,6 +60,8 @@ ViewComponent = React.createClass({
 });
 ````
 
+### NOTE: simple function or `render` method returning a view
+
 ## 3 Ways of Creating React Components:
 - Classical way (ES5 way)
 - Classy way (ES6 way)
@@ -100,6 +102,8 @@ ViewComponent = function() {
 	return <View />
 };
 ```
+
+### NOTE: Once again, simple function or `render` method returns a view
 
 ## Dev Environment Setup
 
@@ -245,8 +249,8 @@ input => {body}			//body with statements with/without a return output
 ```
 
 ## What is JSX? Why use it?
-- JSX is JavaScript Syntax eXtension
-- Easier way of creating HTML nodes/elements in JavaScript
+- JSX stands for JavaScript Syntax eXtension
+- Easier way of creating HTML nodes/elements in React code
 - Requires Babel to convert JSX code to JavaScript that browsers understand
 - Without JSX, we have to write React code this way
 ```js

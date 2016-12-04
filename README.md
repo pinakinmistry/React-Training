@@ -233,7 +233,7 @@ export default App
 ```
 
 ## ES6 fat arrow function:
-### () => ()
+### (input) => (output)
 
 ## Hardcoding no Fun - Pass Data and Actions
 - Nothing should be set in stone

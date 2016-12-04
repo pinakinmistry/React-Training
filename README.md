@@ -17,11 +17,12 @@
 - Not a framework
 - Doesn't cover anything other than view, not even model or routing
 - Controller ??? (Component controls itself)
-
-### MVC in View is not appropriate.
+- It outsources client side routing to npm package `react-router`
+- It outsources model/state management to npm packages like `react-redux`, `flux`, etc.
 
 ### How it works?
-- Views are written in JavaScript/JSX (JavaScript Syntax eXtension)
+- MVC in View is not appropriate.
+- Views are written in form of JavaScript functions
 - User interface and user interaction are written declaratively in form of components
 - App then becomes a tree of components and sub components
 - Data is passed in form of props and states from top of the tree

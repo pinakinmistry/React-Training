@@ -285,7 +285,7 @@ const App = React.createClass({
 export default App
 ```
 
-### Props Validation
+## Props Validation
 #### App.js
 ```js
 import React from 'react'
@@ -305,7 +305,7 @@ App.propTypes = {
 export default App
 ```
 
-### Default Props
+## Default Props
 #### App.js
 ```js
 import React from 'react'

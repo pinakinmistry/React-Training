@@ -5,15 +5,37 @@
 - CSS
 - JavaScript
 
-## What is React?
+### What is React?
+- A JavaScript library for building user interface 
+- HTML is written in JavaScript without using HTML
+- Declarative
+- Functional
+- Component based
+- Virtual DOM
 
-## What it's not?
+### What it's not?
+- Not a framework
+- Doesn't cover anything other than view, not even model or routing
+- Controller ???
 
-## How it works?
+### MVC in View is not appropriate.
 
-## Why React? Why is it Awesome?
+### How it works?
+- Views are written in JavaScript/JSX (JavaScript Syntax eXtension)
+- User interface and user interaction are written declaratively in form of components
+- App then becomes a tree of components and sub components
+- Data is passed in form of props and states from top of the tree
+- Data flow only in one way direction from top to bottom
+- Re-render only what has changed with help of shallow comparison
+- Entire DOM interaction is handled by React
 
-## Functional View
+### Why React? Why is it Awesome?
+- Radical way of writing views
+- Logic is packed in component and easy to reason about and debug
+- Learn once, write anywhere (React Native for native apps)
+- Super Fast
+
+### Functional View
 
 ```
 //Function returning just a view with no other power:
@@ -50,7 +72,6 @@ ViewComponent = React.createClass({
 		return <View />
 	}
 });
-
 ```
 
 ### Classy Way example
@@ -64,7 +85,6 @@ class ViewComponent extends React.Component {
 		return <View />
 	}
 }
-
 ```
 
 
@@ -74,7 +94,6 @@ class ViewComponent extends React.Component {
 ViewComponent = function (){
 	return <View />
 };
-
 ```
 
 ## Dev Environment Setup

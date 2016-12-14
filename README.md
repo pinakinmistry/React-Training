@@ -479,7 +479,6 @@ export default App
 
 ## `state` vs `props`
 
-
 ## Composition of Components
 - React components can be nested
 - A React component should be broken down into logical sub components

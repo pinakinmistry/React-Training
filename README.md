@@ -324,6 +324,7 @@ export default App
 ###Props Validation
 #### App.js
 ```js
+//Classical way
 import React from 'react'
 
 const App = React.createClass({
@@ -333,11 +334,14 @@ const App = React.createClass({
 })
 
 App.propTypes = {
-	header: React.PropTypes.string,
-	body: React.PropTypes.number.isRequired
+	header: React.PropTypes.string.isRequired,
+	body: React.PropTypes.number
 }
 
 export default App
+```
+#### PropTypes that can be validated:
+```js
 ```
 
 ### Default Props

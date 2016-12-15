@@ -412,7 +412,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 //Don't pass input as its no more a prop
-ReactDOM.render(<App header="Dynamic Header" />, document.getElementById('app'))
+ReactDOM.render(<App header="ToDo App" />, document.getElementById('app'))
 ```
 
 #### App.js
@@ -482,7 +482,7 @@ class App extends React.Component {
 			input: 'Enter text'
 		}
 	}
-	onChangeHandler(e) {
+	onChange(e) {
 		this.setState({ input: e.target.value })
 	}
 	render() {
@@ -491,7 +491,7 @@ class App extends React.Component {
 				<h1>{this.props.header}</h1>
 				<input
 					value={this.state.input} 
-					onChange={this.onChangeHandler.bind(this)}
+					onChange={this.onChange.bind(this)}
 				/>
 			</div>
 		)

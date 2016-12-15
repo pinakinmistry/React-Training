@@ -16,7 +16,7 @@ const App = React.createClass({
 			<div>
 				<h1>{this.props.header}</h1>
 				<input type="text"
-					value={this.state.input}
+					placeholder={this.state.input}
 					onChange={this.onChange} />
 			</div>
 		);

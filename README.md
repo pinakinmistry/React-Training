@@ -237,6 +237,7 @@ export default App
 
 ```js
 //Functional way
+import React from 'react'
 
 const App = () => <h1>My First React Component</h1>
 

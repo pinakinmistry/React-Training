@@ -1,18 +1,26 @@
 import React from 'react'
 
-class App extends React.Component {
-	render() {
-		return <h1>{this.props.header}</h1>
+const App = React.createClass({
+	getInitialState: function() {
+		return {
+			input: 'Enter task'
+		}
+	},
+	onChange: function(e) {
+		this.setState({
+			input: e.target.value
+		})
+	},
+	render: function() {
+		return (
+			<div>
+				<h1>{this.props.header}</h1>
+				<input type="text"
+					value={this.state.input}
+					onChange={this.onChange} />
+			</div>
+		);
 	}
-}
-
-App.propTypes = {
-	header: React.PropTypes.string.isRequired,
-	body: React.PropTypes.number
-}
-
-App.defaultProps = {
-	header: "Classy Default Header"
-}
+})
 
 export default App

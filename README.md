@@ -372,7 +372,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-ReactDOM.render(<App header="Dynamic Header" input="Enter text"/>, document.getElementById('app'))
+ReactDOM.render(<App header="ToDo App" input="Enter task"/>, document.getElementById('app'))
 ```
 
 #### App.js
@@ -422,7 +422,7 @@ import React from 'react'
 const App = React.createClass({
 	getInitialState: function() {
 		return {
-			input: 'Enter text'
+			input: 'Enter task'
 		}
 	},
 	render: function () {
@@ -449,8 +449,10 @@ const App = React.createClass({
 			input: 'Enter text'
 		}
 	},
-	onChangeHandler: function(e) {
-		this.setState({ input: e.target.value })
+	onChange: function(e) {
+		this.setState({
+			input: e.target.value
+		})
 	},
 	render: function () {
 		return (
@@ -458,7 +460,7 @@ const App = React.createClass({
 				<h1>{this.props.header}</h1>
 				<input
 					value={this.state.input} 
-					onChange={this.onChangeHandler}
+					onChange={this.onChange}
 				/>
 			</div>
 		)

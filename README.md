@@ -362,6 +362,7 @@ App.defaultProps = {
 
 export default App
 ```
+> NOTE: props validation is done in same way in Classical, Classy and Functional Components
 
 ## Handling User Input
 

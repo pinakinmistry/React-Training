@@ -311,9 +311,10 @@ export default App
 
 #### App.js ()
 ```js
-const App = function(props) {
-	return <h1>{props.header}</h1>
-}
+//Functional way
+import React from 'react'
+
+const App = (props) => <h1>{props.header}</h1>
 
 export default App
 ```

@@ -493,6 +493,7 @@ class App extends React.Component {
 					value={this.state.input} 
 					onChange={this.onChange.bind(this)}
 				/>
+				<h2>{this.state.input}</h2>
 			</div>
 		)
 	}

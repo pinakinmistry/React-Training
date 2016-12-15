@@ -4,7 +4,8 @@ class App extends React.Component {
 	constructor() {
 		super()
 		this.state = {
-			input: 'Enter task'
+			input: '',
+			tasks: []
 		}
 	}
 	onChange(e) {
@@ -12,14 +13,25 @@ class App extends React.Component {
 			input: e.target.value
 		})
 	}
+	onAddTask() {
+		this.setState({
+			input: '',
+			tasks: [...this.state.tasks, this.state.input]
+		})
+	}
 	render() {
 		return (
 			<div>
 				<h1>{this.props.header}</h1>
 				<input type="text"
-					placeholder={this.state.input}
+					placeholder="Enter task"
+					value={this.state.input}
 					onChange={this.onChange.bind(this)} />
-				<h2>{this.state.input}</h2>
+				<button onClick={this.onAddTask.bind(this)}>Add</button>
+				<ul>
+					{this.state.tasks.map((task) => 
+						<li><label><input type="checkbox" /> {task}</label></li>)}
+				</ul>
 			</div>
 		);
 	}

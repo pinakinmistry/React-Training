@@ -130,8 +130,8 @@ We need below NPM packages:
 ```
 npm init -y
 npm install react react-dom --save
-npm i -g babel webpack webpack-dev-server
-npm i -g babel-core babel-loader babel-preset-react babel-preset-es2015
+npm i -g babel babel-core babel-loader babel-preset-react babel-preset-es2015 --save-dev
+npm i -g webpack webpack-dev-server
 ```
 
 ## My First React Component

@@ -1,26 +1,28 @@
 import React from 'react'
 
-const App = React.createClass({
-	getInitialState: function() {
-		return {
+class App extends React.Component {
+	constructor() {
+		super()
+		this.state = {
 			input: 'Enter task'
 		}
-	},
-	onChange: function(e) {
+	}
+	onChange(e) {
 		this.setState({
 			input: e.target.value
 		})
-	},
-	render: function() {
+	}
+	render() {
 		return (
 			<div>
 				<h1>{this.props.header}</h1>
 				<input type="text"
 					placeholder={this.state.input}
-					onChange={this.onChange} />
+					onChange={this.onChange.bind(this)} />
+				<h2>{this.state.input}</h2>
 			</div>
 		);
 	}
-})
+}
 
 export default App

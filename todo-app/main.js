@@ -2,4 +2,4 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-ReactDOM.render(<App header="ToDo App" />, document.getElementById('app'))
+ReactDOM.render(<App header="Classy ToDo App" />, document.getElementById('app'))

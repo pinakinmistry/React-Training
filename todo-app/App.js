@@ -1,10 +1,6 @@
 import React from 'react'
 
-const App = React.createClass({
-	render: function() {
-		return <h1>{this.props.header}</h1>
-	}
-})
+const App = (props) => <h1>{props.header}</h1>
 
 App.propTypes = {
 	header: React.PropTypes.string.isRequired,

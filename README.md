@@ -324,7 +324,6 @@ export default App
 ###Props Validation
 #### App.js
 ```js
-//Classical way
 import React from 'react'
 
 const App = React.createClass({
@@ -340,9 +339,11 @@ App.propTypes = {
 
 export default App
 ```
+
 #### PropTypes that can be validated:
 ```js
 ```
+> NOTE: props validation is done in same way in Classical, Classy and Functional Components
 
 ### Default Props
 #### App.js

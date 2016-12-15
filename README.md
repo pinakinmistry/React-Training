@@ -280,6 +280,7 @@ ReactDOM.render(<App header="Dynamic Header"/>, document.getElementById('app'))
 
 #### App.js
 ```js
+//Classical way
 import React from 'react'
 
 const App = React.createClass({
@@ -292,6 +293,19 @@ export default App
 ```
 
 > Note: `{}` is used to interleave/invoke JavaScript expression within JSX
+
+```js
+//Classy way
+import React from 'react'
+
+class App extends React.Component {
+	render() {
+		return <h1>{this.props.header}</h1>
+	}
+}
+
+export default App
+```
 
 ## `props` are received as input to functional/stateless components:
 

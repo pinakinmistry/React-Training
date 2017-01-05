@@ -744,6 +744,37 @@ const Links = () =>
 
 export default Links
 ```
+## `activeClassName` and `activeStyle` props for styling active `Link`
+#### links.js
+```js
+import React from 'react'
+import {Link} from 'react-router'
+
+const Links = () =>
+    <nav>
+        <Link activeClassName="active" to="/">All | </Link>
+        <Link activeClassName="active" to="/notdone+">Not Done | </Link>
+        <Link activeClassName="active" to="/done">Done</Link>
+    </nav>
+
+export default Links
+```
+
+```js
+import React from 'react'
+import {Link} from 'react-router'
+
+const Links = () =>
+    <nav>
+        <Link activeStyle={{fontWeight: 'bolder'}} to="/">All | </Link>
+        <Link activeStyle={{fontWeight: 'bolder'}} to="/notdone+">Not Done | </Link>
+        <Link activeStyle={{fontWeight: 'bolder'}} to="/done">Done</Link>
+    </nav>
+
+export default Links
+```
+
+
 
 ## Composition of Components
 - React components can be nested
@@ -766,6 +797,7 @@ const Heart = () => <span>&heart;</span>
 
 export default App
 ```
+
 
 
 

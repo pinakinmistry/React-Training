@@ -37,6 +37,7 @@
 - Learn once, write anywhere (React Native for native apps)
 - Learn once, forget everything else ;-)
 - Super Fast and Fun
+- Cut the Crap; Go for Gold
 
 ### Look Ma, who all are using React:
 - Facebook, Instagram

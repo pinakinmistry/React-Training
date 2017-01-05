@@ -1,4 +1,5 @@
 import React from 'react'
+import Links from './links'
 
 class App extends React.Component {
 	constructor() {
@@ -21,8 +22,8 @@ class App extends React.Component {
 		this.refs.input.focus()
 	}
 	toggleTodo(i) {
-		let tasks = this.state.tasks;
-		tasks[i].done = !tasks[i].done;
+		let tasks = this.state.tasks
+		tasks[i].done = !tasks[i].done
 		this.setState({
 			tasks
 		})
@@ -31,6 +32,16 @@ class App extends React.Component {
 		this.refs.input.focus()
 	}
 	render() {
+		let filter, visibleTasks = this.state.tasks;
+
+		if(this.props.params.show) {
+			filter = this.props.params.show === 'done' ? true : false
+			visibleTasks = this.state.tasks.filter(task => task.done === filter)
+		}
+		if(filter) {
+			visibleTasks = this.state.tasks.filter(task => task.done === filter)
+		}
+
 		return (
 			<div>
 				<h1>{this.props.header}</h1>
@@ -41,8 +52,8 @@ class App extends React.Component {
 					onChange={this.onChange.bind(this)} />
 				<button onClick={this.onAddTask.bind(this)}>Add</button>
 				<ul>
-					{this.state.tasks.map((task, i) => 
-						<li>
+					{visibleTasks.map((task, i) =>
+						<li key={i}>
 							<label>
 								<input type="checkbox"
 									checked={task.done}
@@ -54,6 +65,7 @@ class App extends React.Component {
 						</li>)
 					}
 				</ul>
+				<Links />
 			</div>
 		);
 	}

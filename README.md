@@ -617,6 +617,10 @@ class App extends React.Component {
 export default App
 ```
 
+## Client Side Routing using `react-router`
+- `react-router` gives JSX styled syntax for defining client side routes in a span
+- `this.props.params` holds properties defined using `path="/:routeParamProperty"` in `Route` definition  
+
 ## Composition of Components
 - React components can be nested
 - A React component should be broken down into logical sub components
@@ -639,9 +643,8 @@ const Heart = () => <span>&heart;</span>
 export default App
 ```
 
-## MultiSelect Dropdown Component
 
-## Passing data using props
+
 
 ## Stateless Component
 - Takes data as input

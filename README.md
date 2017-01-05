@@ -617,6 +617,12 @@ class App extends React.Component {
 export default App
 ```
 
+
+
+# Component Life Cycle
+
+
+
 # Client Side Routing using `react-router` npm package
 - `react-router` gives JSX styled syntax for defining client side routes in a span
 - `this.props.params` holds properties defined using `path="/:routeParamProperty"` in `Route` definition

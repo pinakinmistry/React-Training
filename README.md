@@ -25,7 +25,7 @@
 - Views are written in form of JavaScript functions
 - User interface and user interaction are written declaratively in form of components
 - App then becomes a tree of components and sub components
-- Data is passed in form of props and states from top of the tree
+- Data is passed in form of `props` and `state` from top of the tree
 - Data flow only in one direction from top to bottom
 - Re-render only what has changed with help of shallow comparison
 - Entire DOM interaction is handled by React

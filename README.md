@@ -721,6 +721,23 @@ class App extends React.Component {
 export default App
 ```
 
+## Defining Links Component to make client side routing
+
+#### links.js
+```js
+import React from 'react'
+import {Link} from 'react-router'
+
+const Links = () =>
+    <nav>
+        <Link to="/">All | </Link>
+        <Link to="/notdone">Not Done | </Link>
+        <Link to="/done">Done</Link>
+    </nav>
+
+export default Links
+```
+
 ## Composition of Components
 - React components can be nested
 - A React component should be broken down into logical sub components

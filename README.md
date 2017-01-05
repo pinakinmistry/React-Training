@@ -631,7 +631,7 @@ export default App
 npm install react-router --save
 ```
 
-## Using Router to define various Routes in To Do App
+## Using `Router` to define various `Route`s in To Do App
 
 #### main.js
 ```js
@@ -727,7 +727,7 @@ class App extends React.Component {
 export default App
 ```
 
-## Defining Links Component to make client side routing
+## Defining `Link` from `react-router` to make client side routing
 
 #### links.js
 ```js

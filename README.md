@@ -617,9 +617,13 @@ class App extends React.Component {
 export default App
 ```
 
-## Client Side Routing using `react-router`
+# Client Side Routing using `react-router` npm package
 - `react-router` gives JSX styled syntax for defining client side routes in a span
-- `this.props.params` holds properties defined using `path="/:routeParamProperty"` in `Route` definition  
+- `this.props.params` holds properties defined using `path="/:routeParamProperty"` in `Route` definition
+
+```
+npm install react-router --save
+```
 
 ## Composition of Components
 - React components can be nested

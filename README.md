@@ -727,7 +727,7 @@ class App extends React.Component {
 export default App
 ```
 
-## Defining `Link` from `react-router` to make client side routing
+## Using `Link` from `react-router` to do client side routing
 
 #### links.js
 ```js

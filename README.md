@@ -626,7 +626,8 @@ export default App
 
 # Client Side Routing using `react-router` npm package
 - `react-router` gives JSX styled syntax for defining client side routes in a span
-- `this.props.params` holds properties defined using `path="/:routeParamProperty"` in `Route` definition
+- `this.props.params` holds route parameters defined using `path="/:routeParam"` in `Route` definition
+- Route parameters can be made optional using `path=/(:optionalRouteParam)` syntax
 
 ```
 npm install react-router --save
@@ -782,7 +783,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 
-const Outer = (props) => <div><h1>ToDo App</h1><Links />{props.children}</div>
+const Outer = (props) => <div><h1>Home</h1><Links />{props.children}</div>
 const About = (props) => <div><h1>About</h1>{props.children}</div>
 const Contact = (props) => <div><h1>Contact</h1>{props.children}</div>
 const Email = () => <div><h1>Email</h1></div>

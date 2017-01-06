@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 
-const Outer = (props) => <div><h1>ToDo App</h1><Links />{props.children}</div>
+const Outer = (props) => <div><h1>Home</h1><Links />{props.children}</div>
 const About = (props) => <div><h1>About</h1>{props.children}</div>
 const Contact = (props) => <div><h1>Contact</h1>{props.children}</div>
 const Email = () => <div><h1>Email</h1></div>

@@ -45,7 +45,16 @@
 
 > 2 names are enough
 
-## Functional View
+## Functional View (Function returning a view)
+```js
+//A function taking some input and returning a view.
+//ES5 syntax
+function(input) {
+	return view;
+}
+//ES6/ES2015 syntax
+(input) => view
+```
 
 ```js
 //Function returning just a view with no other power:

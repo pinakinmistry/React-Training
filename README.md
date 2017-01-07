@@ -901,7 +901,7 @@ ReactDOM.render(
 )
 ```
 
-## Route leave check using `this.context.route.setRouteLeaveHook`
+## Route leave check using `this.context.router.setRouteLeaveHook`
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'

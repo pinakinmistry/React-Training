@@ -3,26 +3,25 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 
-const Outer = (props) => <div><h1>Home</h1><Links />{props.children}</div>
-const About = (props) => <div><h1>About</h1>{props.children}</div>
-const Contact = (props) => <div><h1>Contact</h1>{props.children}</div>
-const Email = () => <div><h1>Email</h1></div>
+const Home = () => <div><h1>Home</h1></div>
+const HomeBody = () => <div>Home body</div>
+const Other = () => <div><h1>Other</h1></div>
+const OtherBody = () => <div>Other body</div>
+
+const Container = (props) => <div>{props.header} {props.body} <Links /></div>
+
 const Links = () => (
     <nav>
         <Link to="/">Home | </Link>
-        <Link to="/about">About | </Link>
-        <Link to="/about/contact">Contact | </Link>
-        <Link to="/about/contact">Email</Link>
+        <Link to="/other">Other</Link>
     </nav>
 )
+
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={Outer}>
-            <Route path="about" component={About}>
-                <Route path="contact" component={Contact}>
-                    <IndexRoute component={Email}></IndexRoute>
-                </Route>
-            </Route>
+        <Route path="/" component={Container}>
+            <IndexRoute components={{header: Home, body: HomeBody}}></IndexRoute>
+            <Route path="other" components={{header: Other, body: OtherBody}}></Route>
         </Route>
     </Router>,
     document.getElementById('app')

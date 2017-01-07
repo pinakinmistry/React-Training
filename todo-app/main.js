@@ -3,26 +3,23 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 
-const Home = () => <div><h1>Home</h1></div>
-const HomeBody = () => <div>Home body</div>
-const Other = () => <div><h1>Other</h1></div>
-const OtherBody = () => <div>Other body</div>
-
-const Container = (props) => <div>{props.header} {props.body} <Links /></div>
+const Home = (props) => (
+    <div>
+        <h1>{props.location.query.message || 'Hello'}</h1>
+        <h2>{props.location.query.name || 'Moto'}</h2>
+        <Links />
+    </div>
+)
 
 const Links = () => (
     <nav>
-        <Link to="/">Home | </Link>
-        <Link to="/other">Other</Link>
+        <Link to={{pathname: '/', query: {message: 'Yo', name: 'You'}}}>Yo</Link>
     </nav>
 )
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={Container}>
-            <IndexRoute components={{header: Home, body: HomeBody}}></IndexRoute>
-            <Route path="other" components={{header: Other, body: OtherBody}}></Route>
-        </Route>
+        <Route path="/" component={Home}></Route>
     </Router>,
     document.getElementById('app')
 )

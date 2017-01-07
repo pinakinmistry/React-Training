@@ -514,7 +514,7 @@ export default App
 
 ## `state` vs `props`
 
-## ToDo App Implementation
+# ToDo App Implementation
 
 #### App.js
 ```js

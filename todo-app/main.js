@@ -3,23 +3,35 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 
-const Home = (props) => (
-    <div>
-        <h1>{props.location.query.message || 'Hello'}</h1>
-        <h2>{props.location.query.name || 'Moto'}</h2>
-        <Links />
-    </div>
-)
+const Home = React.createClass({
+    componentWillMount() {
+        this.context.router.setRouteLeaveHook(
+            this.props.route,
+            this.routerWillLeave
+        )
+    },
+    routerWillLeave(nextLocation) {
+        return 'Going to ' + JSON.stringify(nextLocation)
+    },
+    render() {
+        return <div><h1>Home</h1><Links /></div>
+    }
+})
+Home.contextTypes = { router: React.PropTypes.object.isRequired }
+
+const About = () => <div><h1>About</h1><Links /></div>
 
 const Links = () => (
     <nav>
-        <Link to={{pathname: '/', query: {message: 'Yo', name: 'You'}}}>Yo</Link>
+        <Link to='/'>Home | </Link>
+        <Link to='/about'>About</Link>
     </nav>
 )
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={Home}></Route>
+        <Route path='/' component={Home}></Route>
+        <Route path='/about' component={About}></Route>
     </Router>,
     document.getElementById('app')
 )

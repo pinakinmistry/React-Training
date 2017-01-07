@@ -627,7 +627,7 @@ class App extends React.Component {
 export default App
 ```
 
-## Composition of Components
+# Composition of Components
 - React components can be nested
 - A React component should be broken down into logical sub components
 - Child properties can be accessed using `props.children`

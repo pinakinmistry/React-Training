@@ -958,6 +958,23 @@ ReactDOM.render(
 - State is read only. It can be changed only by dispatching an action
 - Reducer is pure function and doesn't cause side effects
 
+## Writing `counter` reducer with tests:
+```js
+function counter(state, action) {
+	return state;
+}
+
+expect(counter(0, { type: 'ÍNCREMENT' })).toEqual(1);
+
+expect(counter(1, { type: 'ÍNCREMENT' })).toEqual(2);
+
+expect(counter(2, { type: 'DECREMENT' })).toEqual(1);
+
+expect(counter(1, { type: 'DECREMENT' })).toEqual(0);
+
+console.log('All tests passed');
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

@@ -943,6 +943,21 @@ ReactDOM.render(
 
 ```
 
+# Redux:
+- A predictable container to hold entire application state
+- Entire application state is maintained as an object in one single store
+- Store is created using `Redux.createStore` by providing a reducer function as input
+- State can be changed only by dispatching action to the store
+- Reducer function takes existing state and action and returns new state based on the action
+- Action is minimal plain JavaScript object with `type` property defining the action 
+- Internally reducer function gets called on dispatch of action which then returns a new state
+- All listeners subscribed to store gets called after reducer function completes
+
+## Principle of Redux:
+- Whole state of application is represented as single JavaScript object
+- State is read only. It can be changed only by dispatching an action
+- Reducer is pure function and doesn't cause side effects
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

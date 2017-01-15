@@ -960,8 +960,15 @@ ReactDOM.render(
 
 ## Writing `counter` reducer with tests:
 ```js
-function counter(state, action) {
-	return state;
+const counter = (state = 0, action) => {
+	switch(action.type) {
+		case 'INCREMENT':
+			return state + 1;
+		case 'DECREMENT':
+			return state - 1;
+		default:
+			return state;
+	}
 }
 
 expect(counter(0, { type: 'ÍNCREMENT' })).toEqual(1);
@@ -974,6 +981,9 @@ expect(counter(1, { type: 'DECREMENT' })).toEqual(0);
 
 console.log('All tests passed');
 ```
+
+
+
 
 ## Stateless Component
 - Takes data as input

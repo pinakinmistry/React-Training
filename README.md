@@ -959,28 +959,35 @@ ReactDOM.render(
 - Reducer is pure function and doesn't cause side effects
 
 ## Writing `counter` reducer with tests:
+#### main.js
 ```js
 const counter = (state = 0, action) => {
 	switch(action.type) {
 		case 'INCREMENT':
-			return state + 1;
+			return state + 1
 		case 'DECREMENT':
-			return state - 1;
+			return state - 1
 		default:
-			return state;
+			return state
 	}
 }
 
-expect(counter(0, { type: 'INCREMENT' })).toEqual(1);
+expect(counter(0, { type: 'INCREMENT' })).toEqual(1)
 
-expect(counter(1, { type: 'INCREMENT' })).toEqual(2);
+expect(counter(1, { type: 'INCREMENT' })).toEqual(2)
 
-expect(counter(2, { type: 'DECREMENT' })).toEqual(1);
+expect(counter(2, { type: 'DECREMENT' })).toEqual(1)
 
-expect(counter(1, { type: 'DECREMENT' })).toEqual(0);
+expect(counter(1, { type: 'DECREMENT' })).toEqual(0)
 
 console.log('All tests passed');
 ``` 
+
+## Using Redux store:
+```js
+
+```
+
 
 
 

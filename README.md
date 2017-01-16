@@ -1076,7 +1076,7 @@ const render = () => {
 }
 ```
 
-## Avoid Array mutation using `concat`, `slice` methods and `...`(spread) operator
+## Avoid Array mutation using `concat`, `slice` and `...`(spread)
 #### main.js
 ```js
 const addCounter = (list) => {

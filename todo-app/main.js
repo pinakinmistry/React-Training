@@ -30,13 +30,13 @@ const Links = () => (
     </nav>
 )
 
-ReactDOM.render(
-    <Router history={browserHistory}>
-        <Route path='/' component={Home}></Route>
-        <Route path='/about' component={About}></Route>
-    </Router>,
-    document.getElementById('app')
-)
+// ReactDOM.render(
+//     <Router history={browserHistory}>
+//         <Route path='/' component={Home}></Route>
+//         <Route path='/about' component={About}></Route>
+//     </Router>,
+//     document.getElementById('app')
+// )
 
 // ReactDOM.render(
 //     <Router history={ browserHistory }>
@@ -82,20 +82,35 @@ const createStore = (reducer) => {
 const store = createStore(counter)
 console.log(store.getState())
 
-store.dispatch({type: 'INCREMENT'})
-console.log(store.getState())
+// store.dispatch({type: 'INCREMENT'})
+// console.log(store.getState())
 
 store.subscribe(() => {
     render()
 })
 
-const render = () => {
-    document.body.innerHTML = store.getState()
+const Counter = ({
+    value,
+    onIncrement,
+    onDecrement
+}) => {
+    return (
+        <div>
+            <h1>{value}</h1>
+            <button onClick={onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+        </div>
+    )
 }
 
-document.addEventListener('click', () => {
-    store.dispatch({type: 'INCREMENT'})
-})
+const render = () => {
+    ReactDOM.render(
+        <Counter
+            value={store.getState()}
+            onIncrement={() => store.dispatch({type: 'INCREMENT'})}
+            onDecrement={() => store.dispatch({type: 'DECREMENT'})}
+        />, document.getElementById('app'))
+}
 
 render()
 

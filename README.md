@@ -983,7 +983,7 @@ expect(counter(1, { type: 'DECREMENT' })).toEqual(0)
 console.log('All tests passed');
 ``` 
 
-## Using Redux store:
+## Redux store method: `getState`, `dispatch` and `subscribe`
 #### main.js
 ```js
 import { createStore } from 'redux'

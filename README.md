@@ -1045,8 +1045,34 @@ const createStore = (reducer) => {
 
     return { getState, dispatch, subscribe }
 }
-``` 
+```
 
+## Implementing Counter as a React component
+#### main.js
+```js
+const Counter = ({
+    value,
+    onIncrement,
+    onDecrement
+}) => {
+    return (
+        <div>
+            <h1>{value}</h1>
+            <button onClick={onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+        </div>
+    )
+}
+
+const render = () => {
+    ReactDOM.render(
+        <Counter
+            value={store.getState()}
+            onIncrement={() => store.dispatch({type: 'INCREMENT'})}
+            onDecrement={() => store.dispatch({type: 'DECREMENT'})}
+        />, document.getElementById('app'))
+}
+```
 
 
 

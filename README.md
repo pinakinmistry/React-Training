@@ -1076,7 +1076,7 @@ const render = () => {
 }
 ```
 
-## Avoid Array mutation using `concat`, `slice` and `...`(spread)
+## Avoid array mutation using `concat`, `slice` and `...`(spread)
 #### main.js
 ```js
 const addCounter = (list) => {
@@ -1138,6 +1138,36 @@ testIncrementCounter()
 console.log('All tests passed')
 ```
 
+## Avoid object mutation using `Object.assign` or object `...`(spread):
+#### main.js
+```js
+const toggleTodo = (todo) => {
+    return Object.assign({}, todo, { completed: !todo.completed })
+    //return { ...todo, completed: !todo.completed }
+}
+
+const testToggleTodo = () => {
+    const todoBefore = {
+        id: '1',
+        text: 'Learn Redux',
+        completed: false
+    }
+    const todoAfter = {
+        id: '1',
+        text: 'Learn Redux',
+        completed: true
+    }
+
+    deepFreeze(todoBefore)
+
+    expect(
+        toggleTodo(todoBefore)
+    ).toEqual(todoAfter)
+}
+
+testToggleTodo()
+console.log('All tests passed')
+``` 
 
 
 

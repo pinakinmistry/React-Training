@@ -1390,6 +1390,12 @@ const todoApp = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter
 })
+
+//Using ES6 shortcut object notation
+const todoApp = combineReducers({
+    todos,
+    visibilityFilter
+})
 ```
 
 ## Stateless Component

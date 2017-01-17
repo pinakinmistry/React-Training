@@ -1363,6 +1363,18 @@ const todoApp = (state = {}, action) => {
 
 const store = createStore(todoApp)
 console.log(store.getState())
+
+store.dispatch({type: 'ADD_TODO', id: '1', text: 'Learn React'})
+console.log(store.getState())
+
+store.dispatch({type: 'ADD_TODO', id: '2', text: 'Learn Redux'})
+console.log(store.getState())
+
+store.dispatch({type: 'TOGGLE_TODO', id: '1'})
+console.log(store.getState())
+
+store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: 'COMPLETED'})
+console.log(store.getState())
 ```
 
 > NOTE: Where is default state and action coming from?

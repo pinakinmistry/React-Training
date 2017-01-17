@@ -117,31 +117,44 @@ const render = () => {
 
 render()
 
-const toggleTodo = (todo) => {
-    return Object.assign({}, todo, { completed: !todo.completed })
-    //return { ...todo, completed: !todo.completed }
+const todos = (state = [], action) => {
+    switch(action.type)  {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                {
+                    id: action.id,
+                    text: action.text,
+                    completed: false
+                }
+            ]
+        default:
+            return state;
+    }
 }
 
-const testToggleTodo = () => {
-    const todoBefore = {
+const testTodos = () => {
+    const todosBefore = []
+    const action = {
+        type: 'ADD_TODO',
+        id: '1',
+        text: 'Learn Redux'
+    }
+    const todosAfter = [{
         id: '1',
         text: 'Learn Redux',
         completed: false
-    }
-    const todoAfter = {
-        id: '1',
-        text: 'Learn Redux',
-        completed: true
-    }
-
-    deepFreeze(todoBefore)
+    }]
+    
+    deepFreeze(todosBefore)
+    deepFreeze(action)
 
     expect(
-        toggleTodo(todoBefore)
-    ).toEqual(todoAfter)
+        todos(todosBefore,action)
+    ).toEqual(todosAfter)
 }
 
-testToggleTodo()
+testTodos()
 console.log('All tests passed')
 
 // expect(counter(0, { type: 'INCREMENT' })).toEqual(1);

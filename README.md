@@ -1284,6 +1284,51 @@ testToggleTodo()
 console.log('All tests passed')
 ```
 
+## Reducer composition with arrays:
+- Split a reducer when it handles multiple concerns
+- `todos` reducer is currently handling both `todos` array as well as individual `todo`
+- Individual todo related logic can be splitted into a new reducer named `todo`
+- Splitting and combining reducers is called Reducer Composition. 
+
+#### main.js
+```js
+const todo = (state, action) => {
+    switch(action.type) {
+        case 'ADD_TODO':
+            return {
+                id: action.id,
+                text: action.text,
+                completed: false
+            }
+        case 'TOGGLE_TODO':
+            if(state.id != action.id) {
+                return state
+            }
+            return {
+                ...state,
+                completed: !state.completed
+            }
+        default:
+            return state
+    }
+}
+
+const todos = (state = [], action) => {
+    switch(action.type)  {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                todo(undefined, action)
+            ]
+        case 'TOGGLE_TODO':
+            return state.map(t => {
+                return todo(t, action)
+            })
+        default:
+            return state
+    }
+}
+```
 
 ## Stateless Component
 - Takes data as input

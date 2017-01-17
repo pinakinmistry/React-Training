@@ -1169,6 +1169,50 @@ testToggleTodo()
 console.log('All tests passed')
 ``` 
 
+## Implement Todos reducer with a test:
+#### main.js
+```js
+const todos = (state = [], action) => {
+    switch(action.type)  {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                {
+                    id: action.id,
+                    text: action.text,
+                    completed: false
+                }
+            ]
+        default:
+            return state;
+    }
+}
+
+const testTodos = () => {
+    const todosBefore = []
+    const action = {
+        type: 'ADD_TODO',
+        id: '1',
+        text: 'Learn Redux'
+    }
+    const todosAfter = [{
+        id: '1',
+        text: 'Learn Redux',
+        completed: false
+    }]
+    
+    deepFreeze(todosBefore)
+    deepFreeze(action)
+
+    expect(
+        todos(todosBefore,action)
+    ).toEqual(todosAfter)
+}
+
+testTodos()
+console.log('All tests passed')
+```
+
 
 
 ## Stateless Component

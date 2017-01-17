@@ -1398,6 +1398,25 @@ const todoApp = combineReducers({
 })
 ```
 
+## Implementing `combineReducers` from scratch
+#### main.js
+```js
+const combineReducers = (reducers) => {
+    return (state = {}, action) => {
+        return Object.keys(reducers).reduce(
+            (nextState, key) => {
+                nextState[key] = reducers[key](
+                    state[key],
+                    action
+                )
+                return nextState
+            },
+            {}
+        )
+    }
+}
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

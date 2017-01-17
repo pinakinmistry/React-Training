@@ -1328,6 +1328,45 @@ const todos = (state = [], action) => {
 }
 ```
 
+## Reducer composition with objects
+- Entire application state should be an object instead of an array
+- An object can hold more than an array and scales well in app of any size
+- Combine existing reducers in a new reducer to create subset of state tree
+- Existing reducers can remain as is
+
+#### main.js
+```js
+const visibilityFilter = (
+    state = 'SHOW_ALL',
+    action
+) => {
+    switch(action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter
+        default:
+            return state
+    }
+}
+
+const todoApp = (state = {}, action) => {
+    return {
+        todos: todos(
+            state.todos,
+            action
+        ),
+        visibilityFilter: visibilityFilter(
+            state.visibilityFilter,
+            action
+        )
+    }
+}
+
+const store = createStore(todoApp)
+console.log(store.getState())
+```
+
+> NOTE: Where is default state and action coming from?
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

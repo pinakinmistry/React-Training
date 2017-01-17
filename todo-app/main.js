@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 import expect from 'expect'
-import { createStore, combineReducers } from 'redux'
+import { createStore } from 'redux'
 import deepFreeze from 'deep-freeze'
 
 const Home = React.createClass({
@@ -92,18 +92,20 @@ const visibilityFilter = (
     }
 }
 
-// const todoApp = (state = {}, action) => {
-//     return {
-//         todos: todos(
-//             state.todos,
-//             action
-//         ),
-//         visibilityFilter: visibilityFilter(
-//             state.visibilityFilter,
-//             action
-//         )
-//     }
-// }
+const combineReducers = (reducers) => {
+    return (state = {}, action) => {
+        return Object.keys(reducers).reduce(
+            (nextState, key) => {
+                nextState[key] = reducers[key](
+                    state[key],
+                    action
+                )
+                return nextState
+            },
+            {}
+        )
+    }
+}
 
 const todoApp = combineReducers({
     todos,
@@ -174,19 +176,19 @@ testToggleTodo()
 console.log('All tests passed')
 
 const store = createStore(todoApp)
-console.log(store.getState())
+// console.log(store.getState())
 
-store.dispatch({type: 'ADD_TODO', id: '1', text: 'Learn React'})
-console.log(store.getState())
+// store.dispatch({type: 'ADD_TODO', id: '1', text: 'Learn React'})
+// console.log(store.getState())
 
-store.dispatch({type: 'ADD_TODO', id: '2', text: 'Learn Redux'})
-console.log(store.getState())
+// store.dispatch({type: 'ADD_TODO', id: '2', text: 'Learn Redux'})
+// console.log(store.getState())
 
-store.dispatch({type: 'TOGGLE_TODO', id: '1'})
-console.log(store.getState())
+// store.dispatch({type: 'TOGGLE_TODO', id: '1'})
+// console.log(store.getState())
 
-store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: 'COMPLETED'})
-console.log(store.getState())
+// store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: 'COMPLETED'})
+// console.log(store.getState())
 
 
 // expect(counter(0, { type: 'INCREMENT' })).toEqual(1);

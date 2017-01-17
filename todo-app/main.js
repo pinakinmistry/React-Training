@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
 import expect from 'expect'
-//import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import deepFreeze from 'deep-freeze'
 
 const Home = React.createClass({
@@ -44,41 +44,6 @@ const Links = () => (
 //         <Route path="/(:show)" component={App}></Route>
 //     </Router>,
 //     document.getElementById('app'))
-
-
-const counter = (state = 0, action) => {
-	switch (action.type) {
-		case 'INCREMENT':
-			return state + 1;
-		case 'DECREMENT':
-			return state - 1;
-		default:
-			return state;
-	}
-}
-
-const createStore = (reducer) => {
-    let state;
-    let listeners = []
-
-    const getState = () => state
-
-    const dispatch = (action) => {
-        state = reducer(state, action)
-        listeners.forEach(listener => listener())
-    }
-
-    const subscribe = (listener) => {
-        listeners.push(listener)
-        return () => {
-            listerners = listerners.filter(l => l != listener)
-        }
-    }
-
-    dispatch({})
-
-    return { getState, dispatch, subscribe }
-}
 
 const todo = (state, action) => {
     switch(action.type) {
@@ -127,18 +92,23 @@ const visibilityFilter = (
     }
 }
 
-const todoApp = (state = {}, action) => {
-    return {
-        todos: todos(
-            state.todos,
-            action
-        ),
-        visibilityFilter: visibilityFilter(
-            state.visibilityFilter,
-            action
-        )
-    }
-}
+// const todoApp = (state = {}, action) => {
+//     return {
+//         todos: todos(
+//             state.todos,
+//             action
+//         ),
+//         visibilityFilter: visibilityFilter(
+//             state.visibilityFilter,
+//             action
+//         )
+//     }
+// }
+
+const todoApp = combineReducers({
+    todos: todos,
+    visibilityFilter: visibilityFilter
+})
 
 const testTodos = () => {
     const todosBefore = []

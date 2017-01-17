@@ -80,43 +80,6 @@ const createStore = (reducer) => {
     return { getState, dispatch, subscribe }
 }
 
-const store = createStore(counter)
-console.log(store.getState())
-
-// store.dispatch({type: 'INCREMENT'})
-// console.log(store.getState())
-
-store.subscribe(() => {
-    render()
-})
-
-const Counter = ({
-    value,
-    onIncrement,
-    onDecrement
-}) => {
-    return (
-        <div>
-            <h1>{value}</h1>
-            <button onClick={onIncrement}>+</button>
-            <button onClick={onDecrement}>-</button>
-        </div>
-    )
-}
-
-const render = () => {
-    ReactDOM.render(
-        <Counter
-            value={store.getState()}
-            onIncrement={() => store.dispatch({type: 'INCREMENT'})}
-            onDecrement={() => store.dispatch({type: 'DECREMENT'})}
-        />,
-        document.getElementById('app')
-    )
-}
-
-render()
-
 const todo = (state, action) => {
     switch(action.type) {
         case 'ADD_TODO':
@@ -149,6 +112,31 @@ const todos = (state = [], action) => {
             return state.map(t => todo(t, action))
         default:
             return state
+    }
+}
+
+const visibilityFilter = (
+    state = 'SHOW_ALL',
+    action
+) => {
+    switch(action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter
+        default:
+            return state
+    }
+}
+
+const todoApp = (state = {}, action) => {
+    return {
+        todos: todos(
+            state.todos,
+            action
+        ),
+        visibilityFilter: visibilityFilter(
+            state.visibilityFilter,
+            action
+        )
     }
 }
 
@@ -214,6 +202,9 @@ const testToggleTodo = () => {
 testTodos()
 testToggleTodo()
 console.log('All tests passed')
+
+const store = createStore(todoApp)
+console.log(store.getState())
 
 // expect(counter(0, { type: 'INCREMENT' })).toEqual(1);
 

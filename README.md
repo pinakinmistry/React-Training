@@ -1379,6 +1379,19 @@ console.log(store.getState())
 
 > NOTE: Where is default state and action coming from?
 
+## Reducer composition using `combineReducer` from Redux library
+#### main.js
+```js
+...
+import { createStore, combineReducers } from 'redux'
+...
+
+const todoApp = combineReducers({
+    todos: todos,
+    visibilityFilter: visibilityFilter
+})
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

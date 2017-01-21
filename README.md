@@ -1494,6 +1494,86 @@ class TodoApp extends Component {
 }
 ```
 
+## Filtering Todos by `dispatch`ing `SET_VISIBILITY_FILTER` action
+#### main.js
+```js
+const FilterLink = ({children, filter, currentFilter}) => {
+    if(filter === currentFilter) {
+        return <span>{children}</span>
+    }
+    return (
+        <a href="#" onClick={(e) => {
+            e.preventDefault()
+            store.dispatch({
+                type: 'SET_VISIBILITY_FILTER',
+                filter
+            })
+        }} >
+            {children}
+        </a>
+    )
+}
+
+let todoId = 0;
+
+const getVisibleTodos = (todos, filter) => {
+    switch(filter) {
+        case 'SHOW_ALL':
+            return todos
+        case 'SHOW_ACTIVE': 
+            return todos.filter(todo => !todo.completed)
+        case 'SHOW_COMPLETED': 
+            return todos.filter(todo => todo.completed)
+    }
+}
+
+class TodoApp extends Component {
+    render() {
+        let {todos, visibilityFilter} = this.props;
+        const visibleTodos = getVisibleTodos(todos, visibilityFilter)
+
+        return (
+            <div>
+                <input ref={node => { this.input = node }}/>
+                <button onClick={() => {
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        text: this.input.value,
+                        id: todoId++
+                    })
+                    this.input.value = ''
+                }}>Add Tasks</button>
+                <ul>
+                    {visibleTodos.map(todo => (
+                        <li key={todo.id}
+                            onClick={() => {
+                                store.dispatch({
+                                    type: 'TOGGLE_TODO',
+                                    id: todo.id
+                                })
+                            }}
+                            style={{
+                                textDecoration: todo.completed ? 'line-through' : 'none'
+                            }}>
+                            {todo.text}
+                        </li>
+                    ))}
+                </ul>
+                <p>
+                    Show:
+                    {' '}
+                    <FilterLink filter="SHOW_ALL" currentFilter={visibilityFilter}>All</FilterLink>
+                    {' '}
+                    <FilterLink filter="SHOW_ACTIVE" currentFilter={visibilityFilter}>Active</FilterLink>
+                    {' '}
+                    <FilterLink filter="SHOW_COMPLETED" currentFilter={visibilityFilter}>Completed</FilterLink>
+                </p>
+            </div>
+        )
+    }
+}
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

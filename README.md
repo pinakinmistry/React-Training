@@ -1379,7 +1379,7 @@ console.log(store.getState())
 
 > NOTE: Where is default state and action coming from?
 
-## Reducer composition using `combineReducer` from Redux library
+## Reducer composition using `combineReducers` from Redux library
 #### main.js
 ```js
 ...

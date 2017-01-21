@@ -1,49 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-import { Router, Route, browserHistory, Link, IndexRoute } from 'react-router'
-import expect from 'expect'
-import { createStore } from 'redux'
-import deepFreeze from 'deep-freeze'
-
-const Home = React.createClass({
-    componentWillMount() {
-        this.context.router.setRouteLeaveHook(
-            this.props.route,
-            this.routerWillLeave
-        )
-    },
-    routerWillLeave(nextLocation) {
-        return 'Going to ' + JSON.stringify(nextLocation)
-    },
-    render() {
-        return <div><h1>Home</h1><Links /></div>
-    }
-})
-Home.contextTypes = { router: React.PropTypes.object.isRequired }
-
-const About = () => <div><h1>About</h1><Links /></div>
-
-const Links = () => (
-    <nav>
-        <Link to='/'>Home | </Link>
-        <Link to='/about'>About</Link>
-    </nav>
-)
-
-// ReactDOM.render(
-//     <Router history={browserHistory}>
-//         <Route path='/' component={Home}></Route>
-//         <Route path='/about' component={About}></Route>
-//     </Router>,
-//     document.getElementById('app')
-// )
-
-// ReactDOM.render(
-//     <Router history={ browserHistory }>
-//         <Route path="/(:show)" component={App}></Route>
-//     </Router>,
-//     document.getElementById('app'))
+import { createStore, combineReducers } from 'redux'
 
 const todo = (state, action) => {
     switch(action.type) {
@@ -92,111 +49,43 @@ const visibilityFilter = (
     }
 }
 
-const combineReducers = (reducers) => {
-    return (state = {}, action) => {
-        return Object.keys(reducers).reduce(
-            (nextState, key) => {
-                nextState[key] = reducers[key](
-                    state[key],
-                    action
-                )
-                return nextState
-            },
-            {}
-        )
-    }
-}
-
 const todoApp = combineReducers({
     todos,
     visibilityFilter
 })
-
-const testTodos = () => {
-    const todosBefore = []
-    const action = {
-        type: 'ADD_TODO',
-        id: '1',
-        text: 'Learn Redux'
-    }
-    const todosAfter = [{
-        id: '1',
-        text: 'Learn Redux',
-        completed: false
-    }]
-    
-    deepFreeze(todosBefore)
-    deepFreeze(action)
-
-    expect(
-        todos(todosBefore,action)
-    ).toEqual(todosAfter)
-}
-
-const testToggleTodo = () => {
-	const todosBefore = [
-		{
-			id: '1',
-			text: 'Learn React',
-			completed: false
-		},
-		{
-			id: '2',
-			text: 'Learn Redux',
-			completed: false
-		}
-	]
-	const action = {
-		type: 'TOGGLE_TODO',
-		id: '1'
-	}
-	const todosAfter = [
-		{
-			id: '1',
-			text: 'Learn React',
-			completed: true
-		},
-		{
-			id: '2',
-			text: 'Learn Redux',
-			completed: false
-		}
-	]
-
-	deepFreeze(todosBefore)
-	deepFreeze(action)
-
-	expect(
-		todos(todosBefore, action)
-	).toEqual(todosAfter)
-}
-
-testTodos()
-testToggleTodo()
-console.log('All tests passed')
-
 const store = createStore(todoApp)
-// console.log(store.getState())
 
-// store.dispatch({type: 'ADD_TODO', id: '1', text: 'Learn React'})
-// console.log(store.getState())
+let todoId = 0;
 
-// store.dispatch({type: 'ADD_TODO', id: '2', text: 'Learn Redux'})
-// console.log(store.getState())
+class TodoApp extends Component {
+    render() {
+        return (
+            <div>
+                <input ref={node => { this.input = node }}/>
+                <button onClick={() => {
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        text: this.input.value,
+                        id: todoId++
+                    })
+                    this.input.value = ''
+                }}>Add Tasks</button>
+                <ul>
+                    {this.props.todos.map(todo => (
+                        <li key={todo.id}>{todo.text}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+}
 
-// store.dispatch({type: 'TOGGLE_TODO', id: '1'})
-// console.log(store.getState())
+const render = () => {
+    ReactDOM.render(
+        <TodoApp todos={store.getState().todos} />,
+        document.getElementById('app')
+    )
+}
 
-// store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: 'COMPLETED'})
-// console.log(store.getState())
-
-
-// expect(counter(0, { type: 'INCREMENT' })).toEqual(1);
-
-// expect(counter(1, { type: 'INCREMENT' })).toEqual(2);
-
-// expect(counter(2, { type: 'DECREMENT' })).toEqual(1);
-
-// expect(counter(1, { type: 'DECREMENT' })).toEqual(0);
-
-// console.log('All tests passed');
+store.subscribe(render)
+render()

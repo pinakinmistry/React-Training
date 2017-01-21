@@ -1641,18 +1641,17 @@ class TodoApp extends Component {
                 />
 ...
 ``` 
-
-## Stateless Component
+## Presentational Component vs Container Component 
+### Presentational Component
 - Takes data as input
 - Takes methods as input
 - Renders it to view
 - Don't own data
 
-## Stateful Component
-- Contains data
-- Goes through change in data/state
-- Manages data with methods
-- Passes data/methods to children components
+### Container Component
 - Owns data
+- Owns change in data/state
+- Passes data/methods to children components
+- Manages data/state by dispatching actions
 
-https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.j8hahvdyg
+[Dan Abramov's Blog](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.j8hahvdyg)

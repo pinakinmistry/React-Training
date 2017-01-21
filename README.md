@@ -1417,6 +1417,45 @@ const combineReducers = (reducers) => {
 }
 ```
 
+## TodoApp with add todo action dispatched to Redux store
+#### main.js
+```js
+let todoId = 0;
+
+class TodoApp extends Component {
+    render() {
+        return (
+            <div>
+                <input ref={node => { this.input = node }}/>
+                <button onClick={() => {
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        text: this.input.value,
+                        id: todoId++
+                    })
+                    this.input.value = ''
+                }}>Add Tasks</button>
+                <ul>
+                    {this.props.todos.map(todo => (
+                        <li key={todo.id}>{todo.text}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+}
+
+const render = () => {
+    ReactDOM.render(
+        <TodoApp todos={store.getState().todos} />,
+        document.getElementById('app')
+    )
+}
+
+store.subscribe(render)
+render()
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

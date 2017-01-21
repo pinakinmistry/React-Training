@@ -1590,6 +1590,8 @@ class TodoApp extends Component {
 ```
 > NOTE: How {} is used to de-structure/extract individual properties from `props` input of `FilterLink`
 
+# Extracting Presentational Components:
+
 ## Extracting `Todo` and `TodoList` as presentational components from `TodoApp`
 #### main.js
 ```js
@@ -1752,6 +1754,101 @@ class TodoApp extends Component {
         )
     }
 }
+```
+
+# Extracting Container Components:
+
+## `Footer`(Presentation) = `FooterLink`(Container) + `Link`(Presentation)
+- `Footer` Component is accepting props (`visibilityFilter` and `onFilterClick`) but not using them.
+- It simply passes them to `FooterLink` presentational component.
+- `Footer` can become a presentational component by making `FooterLink` as container component
+
+#### main.js
+```js
+const Link = ({active, children, onClick}) => {
+    if(active) {
+        return <span>{children}</span>
+    }
+    return (
+        <a href="#" onClick={(e) => {
+            e.preventDefault()
+            onClick()
+        }} >
+            {children}
+        </a>
+    )
+}
+
+class FilterLink extends Component {
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(() => this.forceUpdate())
+    }
+    componentWillUnmount() {
+        this.unsubscribe()
+    }
+    render() {
+        const props = this.props
+        const state = store.getState()
+
+        return (
+            <Link 
+                active={props.filter === state.visibilityFilter}
+                onClick={() => store.dispatch({
+                    type: 'SET_VISIBILITY_FILTER',
+                    filter: props.filter
+                })}
+            >
+                {props.children}
+            </Link>
+        )
+    }
+}
+
+const Footer = () => (
+    <p>
+        Show:
+        {' '}
+        <FilterLink
+            filter="SHOW_ALL"
+        >
+            All
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="SHOW_ACTIVE"
+         >
+            Active
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="SHOW_COMPLETED"
+         >
+            Completed
+        </FilterLink>
+    </p>
+)
+
+let todoId = 0;
+
+const TodoApp = ({todos, visibilityFilter}) => (
+    <div>
+        <AddTodo onAddClick={(text) => {
+            store.dispatch({
+                type: 'ADD_TODO',
+                id: todoId++,
+                text
+            })
+        }} />
+        <TodoList
+            todos={getVisibleTodos(todos, visibilityFilter)}
+            onTodoClick={id => store.dispatch({
+                type: 'TOGGLE_TODO',
+                id
+            })}
+        />
+        <Footer />
+    </div>
+)
 ```
 
 ## Refactoring `TodoApp` to a functional component

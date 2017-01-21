@@ -1759,7 +1759,7 @@ class TodoApp extends Component {
 # Extracting Container Components:
 
 ## `Footer`(Presentation) = `FooterLink`(Container) + `Link`(Presentation)
-- `Footer` Component is accepting props (`visibilityFilter` and `onFilterClick`) but not using them.
+- `Footer` component is accepting props (`visibilityFilter` and `onFilterClick`) but not using them.
 - It simply passes them to `FooterLink` presentational component.
 - `Footer` can become a presentational component by making `FooterLink` as container component
 

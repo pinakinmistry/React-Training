@@ -72,8 +72,6 @@ const FilterLink = ({children, filter, currentFilter}) => {
     )
 }
 
-let todoId = 0;
-
 const getVisibleTodos = (todos, filter) => {
     switch(filter) {
         case 'SHOW_ALL':
@@ -84,6 +82,8 @@ const getVisibleTodos = (todos, filter) => {
             return todos.filter(todo => todo.completed)
     }
 }
+
+let todoId = 0;
 
 class TodoApp extends Component {
     render() {

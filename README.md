@@ -1590,7 +1590,7 @@ class TodoApp extends Component {
 ```
 > NOTE: How {} is used to de-structure/extract individual properties from `props` input of `FilterLink`
 
-## Extracting 	`Todo` and `TodoList` as presentational components from `TodoApp`
+## Extracting `Todo` and `TodoList` as presentational components from `TodoApp`
 #### main.js
 ```js
 const Todo = ({onClick, completed, text}) => (
@@ -1655,3 +1655,101 @@ class TodoApp extends Component {
 - Manages data/state by dispatching actions
 
 [Dan Abramov's Blog](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.j8hahvdyg)
+
+## Extracting `AddTodo` and `Footer` as presentational components
+#### main.js
+```js
+const AddTodo = ({onAddClick}) => {
+    let input;
+    return (
+        <div>
+            <input ref={node => { input = node }}/>
+            <button onClick={() => {
+                onAddClick(input.value)
+                input.value = ''
+            }}>Add Tasks</button>
+        </div>
+    )
+}
+
+const FilterLink = ({children, filter, currentFilter, onClick}) => {
+    if(filter === currentFilter) {
+        return <span>{children}</span>
+    }
+    return (
+        <a href="#" onClick={(e) => {
+            e.preventDefault()
+            onClick(filter)
+        }} >
+            {children}
+        </a>
+    )
+}
+
+const Footer = ({visibilityFilter, onFilterClick}) => (
+    <p>
+        Show:
+        {' '}
+        <FilterLink
+            filter="SHOW_ALL"
+            currentFilter={visibilityFilter}
+            onClick={onFilterClick}
+        >
+            All
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="SHOW_ACTIVE"
+            currentFilter={visibilityFilter}
+            onClick={onFilterClick}
+        >
+            Active
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="SHOW_COMPLETED"
+            currentFilter={visibilityFilter}
+            onClick={onFilterClick}
+        >
+            Completed
+        </FilterLink>
+    </p>
+)
+
+let todoId = 0;
+
+class TodoApp extends Component {
+    render() {
+        let {todos, visibilityFilter} = this.props;
+        const visibleTodos = getVisibleTodos(todos, visibilityFilter)
+
+        return (
+            <div>
+                <AddTodo onAddClick={(text) => {
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        id: todoId++,
+                        text
+                    })
+                }} />
+                <TodoList
+                    todos={visibleTodos}
+                    onTodoClick={id => store.dispatch({
+                        type: 'TOGGLE_TODO',
+                        id
+                    })}
+                />
+                <Footer
+                    visibilityFilter={visibilityFilter} 
+                    onFilterClick={(filter) => {
+                        store.dispatch({
+                            type: 'SET_VISIBILITY_FILTER',
+                            filter
+                        })
+                    }}
+                />
+            </div>
+        )
+    }
+}
+```

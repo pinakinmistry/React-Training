@@ -1756,6 +1756,38 @@ class TodoApp extends Component {
 }
 ```
 
+## Refactoring `TodoApp` to a functional component
+#### main.js
+```js
+const TodoApp = ({todos, visibilityFilter}) => (
+    <div>
+        <AddTodo onAddClick={(text) => {
+            store.dispatch({
+                type: 'ADD_TODO',
+                id: todoId++,
+                text
+            })
+        }} />
+        <TodoList
+            todos={getVisibleTodos(todos, visibilityFilter)}
+            onTodoClick={id => store.dispatch({
+                type: 'TOGGLE_TODO',
+                id
+            })}
+        />
+        <Footer
+            visibilityFilter={visibilityFilter} 
+            onFilterClick={(filter) => {
+                store.dispatch({
+                    type: 'SET_VISIBILITY_FILTER',
+                    filter
+                })
+            }}
+        />
+    </div>
+)
+```
+
 # Extracting Container Components:
 
 ## `Footer`(Presentation) = `FooterLink`(Container) + `Link`(Presentation)
@@ -1850,38 +1882,6 @@ const TodoApp = ({todos, visibilityFilter}) => (
             })}
         />
         <Footer />
-    </div>
-)
-```
-
-## Refactoring `TodoApp` to a functional component
-#### main.js
-```js
-const TodoApp = ({todos, visibilityFilter}) => (
-    <div>
-        <AddTodo onAddClick={(text) => {
-            store.dispatch({
-                type: 'ADD_TODO',
-                id: todoId++,
-                text
-            })
-        }} />
-        <TodoList
-            todos={getVisibleTodos(todos, visibilityFilter)}
-            onTodoClick={id => store.dispatch({
-                type: 'TOGGLE_TODO',
-                id
-            })}
-        />
-        <Footer
-            visibilityFilter={visibilityFilter} 
-            onFilterClick={(filter) => {
-                store.dispatch({
-                    type: 'SET_VISIBILITY_FILTER',
-                    filter
-                })
-            }}
-        />
     </div>
 )
 ```

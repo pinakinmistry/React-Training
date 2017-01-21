@@ -1417,7 +1417,7 @@ const combineReducers = (reducers) => {
 }
 ```
 
-## TodoApp with add todo action dispatched to Redux store
+## TodoApp with `ADD_TODO` action `dispatch`ed to Redux `store`
 #### main.js
 ```js
 let todoId = 0;

@@ -1937,3 +1937,20 @@ const TodoApp = ({todos, visibilityFilter}) => (
     </div>
 )
 ``` 
+
+## Refactor `TodoApp` and remove need of rendering:
+#### main.js
+```js
+const TodoApp = () => (
+    <div>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
+    </div>
+)
+
+ReactDOM.render(
+    <TodoApp />,
+    document.getElementById('app')
+)
+```

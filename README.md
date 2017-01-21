@@ -1765,6 +1765,7 @@ class TodoApp extends Component {
 
 #### main.js
 ```js
+//Presentational Component
 const Link = ({active, children, onClick}) => {
     if(active) {
         return <span>{children}</span>
@@ -1779,6 +1780,7 @@ const Link = ({active, children, onClick}) => {
     )
 }
 
+//Container Component
 class FilterLink extends Component {
     componentDidMount() {
         this.unsubscribe = store.subscribe(() => this.forceUpdate())
@@ -1804,6 +1806,7 @@ class FilterLink extends Component {
     }
 }
 
+//Presentational Component
 const Footer = () => (
     <p>
         Show:

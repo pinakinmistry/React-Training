@@ -1885,3 +1885,55 @@ const TodoApp = ({todos, visibilityFilter}) => (
     </div>
 )
 ```
+
+## Extracting `AddTodo` and `VisibleTodoList` as container components
+#### main.js
+```js
+const AddTodo = () => {
+    let input;
+    return (
+        <div>
+            <input ref={node => { input = node }}/>
+            <button onClick={() => {
+                store.dispatch({
+                    type: 'ADD_TODO',
+                    id: todoId++,
+                    text: input.value
+                })
+                input.value = ''
+            }}>Add Tasks</button>
+        </div>
+    )
+}
+
+class VisibleTodoList extends Component {
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(() => this.forceUpdate())
+    }
+    componentWillUnmount() {
+        this.unsubscribe()
+    }
+    render() {
+        const props = this.props
+        const state = store.getState()
+
+        return (
+            <TodoList
+                todos={getVisibleTodos(state.todos, state.visibilityFilter)}
+                onTodoClick={id => store.dispatch({
+                    type: 'TOGGLE_TODO',
+                    id
+                })}
+            />
+        )
+    }
+}
+
+const TodoApp = ({todos, visibilityFilter}) => (
+    <div>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
+    </div>
+)
+``` 

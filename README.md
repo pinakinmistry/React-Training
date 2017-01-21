@@ -1589,6 +1589,58 @@ class TodoApp extends Component {
 }
 ```
 
+## Extracting 	`Todo` and `TodoList` as presentational components from `TodoApp` component
+#### main.js
+```js
+const Todo = ({onClick, completed, text}) => (
+    <li onClick={onClick}
+        style={{
+            textDecoration: completed ? 'line-through' : 'none'
+        }}>
+        {text}
+    </li>
+)
+
+const TodoList = ({todos, onTodoClick}) => (
+    <ul>
+        {todos.map(todo =>
+            <Todo
+                key={todo.id}
+                {...todo}
+                onClick={() => onTodoClick(todo.id)}
+            />
+        )}
+    </ul>
+)
+
+let todoId = 0;
+
+class TodoApp extends Component {
+    render() {
+        let {todos, visibilityFilter} = this.props;
+        const visibleTodos = getVisibleTodos(todos, visibilityFilter)
+
+        return (
+            <div>
+                <input ref={node => { this.input = node }}/>
+                <button onClick={() => {
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        text: this.input.value,
+                        id: todoId++
+                    })
+                    this.input.value = ''
+                }}>Add Tasks</button>
+                <TodoList
+                    todos={visibleTodos}
+                    onTodoClick={id => store.dispatch({
+                        type: 'TOGGLE_TODO',
+                        id
+                    })}
+                />
+...
+```
+
 ## Stateless Component
 - Takes data as input
 - Takes methods as input

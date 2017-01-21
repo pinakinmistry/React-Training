@@ -1938,7 +1938,7 @@ const TodoApp = ({todos, visibilityFilter}) => (
 )
 ``` 
 
-## Refactor `TodoApp` and remove need of rendering:
+## Refactor `TodoApp` and remove subscription to render on state change:
 #### main.js
 ```js
 const TodoApp = () => (

@@ -1588,8 +1588,9 @@ class TodoApp extends Component {
     }
 }
 ```
+> NOTE: How {} is used to de-structure/extract individual properties from `props` input of `FilterLink`
 
-## Extracting 	`Todo` and `TodoList` as presentational components from `TodoApp` component
+## Extracting 	`Todo` and `TodoList` as presentational components from `TodoApp`
 #### main.js
 ```js
 const Todo = ({onClick, completed, text}) => (
@@ -1639,7 +1640,7 @@ class TodoApp extends Component {
                     })}
                 />
 ...
-```
+``` 
 
 ## Stateless Component
 - Takes data as input

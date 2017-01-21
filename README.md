@@ -1654,4 +1654,4 @@ class TodoApp extends Component {
 - Passes data/methods to children components
 - Manages data/state by dispatching actions
 
-[Dan Abramov's Blog](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.j8hahvdyg){:target="_blank"}
+[Dan Abramov's Blog](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.j8hahvdyg)

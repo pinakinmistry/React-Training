@@ -82,13 +82,13 @@ const TodoList = ({todos, onTodoClick}) => (
     </ul>
 )
 
-const AddTodo = (props, {store}) => {
+let AddTodo = ({dispatch}) => {
     let input;
     return (
         <div>
             <input ref={node => { input = node }}/>
             <button onClick={() => {
-                store.dispatch({
+                dispatch({
                     type: 'ADD_TODO',
                     id: todoId++,
                     text: input.value
@@ -98,9 +98,14 @@ const AddTodo = (props, {store}) => {
         </div>
     )
 }
-AddTodo.contextTypes = {
-    store: React.PropTypes.object
-}
+AddTodo = connect(
+    state => {
+        return {}
+    },
+    dispatch => {
+        return { dispatch }
+    }
+)(AddTodo)
 
 const Link = ({active, children, onClick}) => {
     if(active) {

@@ -2254,7 +2254,7 @@ npm install react-redux --save
 # Generating container component using `connect` method from `react-redux` package
  All container components follow below pattern:
 - Getting access to Redux's `store` from `context`
-- `subscribe` to `store` to `forceUpdate` (render) the component whenever store is updated
+- `subscribe` to `store` to `forceUpdate` (render) its component tree whenever store is updated
 - Map Redux's `state` to props of child/presentational components that they renders
 - Map Redux's `dispatch` to props of child/presentational component's callback methods
 

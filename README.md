@@ -2317,3 +2317,15 @@ AddTodo = connect(
     }
 )(AddTodo)
 ```
+
+## 	`connect` with null arguments or no arguments gives `dispatch` as default `props`
+#### main.js
+```js
+AddTodo = connect(
+    null,
+    null
+)(AddTodo)
+
+//or
+AddTodo = connect()(AddTodo)
+```

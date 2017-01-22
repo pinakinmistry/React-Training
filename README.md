@@ -2085,7 +2085,7 @@ const TodoApp = ({store}) => (
 )
 ```
 
-## Passing `store` with help of `Provider` component and `childContext`
+## Passing `store` implicitly with help of `Provider` component and `context`
 #### main.js
 ```js
 const AddTodo = (props, {store}) => {

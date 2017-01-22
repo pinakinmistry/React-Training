@@ -2284,3 +2284,36 @@ const VisibleTodoList = connect(
     mapDispatchToProps
 )(TodoList)
 ```
+
+## Generating `AddTodo` component using `connect` method
+- AddTodo component can't be classified as container or presentational component
+- It doesn't take any props from Redux store
+- It just needs Redux's `dispatch` method to dispatch `ADD_TODO` action
+
+#### main.js
+```js
+let AddTodo = ({dispatch}) => {
+    let input;
+    return (
+        <div>
+            <input ref={node => { input = node }}/>
+            <button onClick={() => {
+                dispatch({
+                    type: 'ADD_TODO',
+                    id: todoId++,
+                    text: input.value
+                })
+                input.value = ''
+            }}>Add Tasks</button>
+        </div>
+    )
+}
+AddTodo = connect(
+    state => {
+        return {}
+    },
+    dispatch => {
+        return { dispatch }
+    }
+)(AddTodo)
+```

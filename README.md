@@ -2245,3 +2245,9 @@ ReactDOM.render(
     document.getElementById('app')
 )
 ```
+
+## Using `Provider` from `react-redux` npm package
+```
+npm install react-redux --save
+```
+

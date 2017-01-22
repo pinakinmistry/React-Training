@@ -2252,6 +2252,13 @@ npm install react-redux --save
 ```
 
 # Generating container component using `connect` method from `react-redux` package
+ All container components follow below pattern:
+- Getting access to Redux's `store` from `context`
+- `subscribe` to `store` to `forceUpdate` (render) the component whenever store is updated
+- Map Redux's `state` to props of child/presentational components that they renders
+- Map Redux's `dispatch` to props of child/presentational component's callback methods
+
+> A container components connects a presentational component to Redux's store by mapping `state` and `dispatch` to its `props`
 
 ## Generating `VisibleTodoList` by `connect`ing Redux's `store` and `dispatch` to `TodoList` presentational component
 #### main.js

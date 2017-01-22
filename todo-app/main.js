@@ -81,9 +81,7 @@ const TodoList = ({todos, onTodoClick}) => (
     </ul>
 )
 
-//const store = createStore(todoApp)
-
-const AddTodo = ({store}) => {
+const AddTodo = (props, {store}) => {
     let input;
     return (
         <div>
@@ -98,6 +96,9 @@ const AddTodo = ({store}) => {
             }}>Add Tasks</button>
         </div>
     )
+}
+AddTodo.contextTypes = {
+    store: React.PropTypes.object
 }
 
 const Link = ({active, children, onClick}) => {
@@ -116,7 +117,7 @@ const Link = ({active, children, onClick}) => {
 
 class FilterLink extends Component {
     componentDidMount() {
-        const {store} = this.props
+        const {store} = this.context
         this.unsubscribe = store.subscribe(() => this.forceUpdate())
     }
     componentWillUnmount() {
@@ -124,7 +125,7 @@ class FilterLink extends Component {
     }
     render() {
         const props = this.props
-        const {store} = this.props
+        const {store} = this.context
         const state = store.getState()
 
         return (
@@ -140,8 +141,11 @@ class FilterLink extends Component {
         )
     }
 }
+FilterLink.contextTypes = {
+    store: React.PropTypes.object
+}
 
-const Footer = ({store}) => (
+const Footer = (props, {store}) => (
     <p>
         Show:
         {' '}
@@ -167,10 +171,13 @@ const Footer = ({store}) => (
         </FilterLink>
     </p>
 )
+Footer.contextTypes = {
+    store: React.PropTypes.object
+}
 
 class VisibleTodoList extends Component {
     componentDidMount() {
-        const {store} = this.props
+        const {store} = this.context
         this.unsubscribe = store.subscribe(() => this.forceUpdate())
     }
     componentWillUnmount() {
@@ -178,7 +185,7 @@ class VisibleTodoList extends Component {
     }
     render() {
         const props = this.props
-        const {store} = this.props
+        const {store} = this.context
         const state = store.getState()
 
         return (
@@ -192,6 +199,9 @@ class VisibleTodoList extends Component {
         )
     }
 }
+VisibleTodoList.contextTypes = {
+    store: React.PropTypes.object
+}
 
 let todoId = 0;
 const todoApp = combineReducers({
@@ -199,15 +209,31 @@ const todoApp = combineReducers({
     visibilityFilter
 })
 
-const TodoApp = ({store}) => (
+class Provider extends Component {
+    getChildContext() {
+        return {
+            store: this.props.store
+        }
+    }
+    render() {
+        return this.props.children
+    }
+}
+Provider.childContextTypes = {
+    store: React.PropTypes.object
+}
+
+const TodoApp = () => (
     <div>
-        <AddTodo store={store} />
-        <VisibleTodoList store={store} />
-        <Footer store={store} />
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
     </div>
 )
 
 ReactDOM.render(
-    <TodoApp store={createStore(todoApp)} />,
+    <Provider store={createStore(todoApp)}>
+        <TodoApp />
+    </Provider>,
     document.getElementById('app')
 )

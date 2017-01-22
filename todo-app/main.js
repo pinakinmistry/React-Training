@@ -81,6 +81,8 @@ const TodoList = ({todos, onTodoClick}) => (
     </ul>
 )
 
+//const store = createStore(todoApp)
+
 const AddTodo = ({store}) => {
     let input;
     return (
@@ -196,7 +198,6 @@ const todoApp = combineReducers({
     todos,
     visibilityFilter
 })
-//const store = createStore(todoApp)
 
 const TodoApp = ({store}) => (
     <div>

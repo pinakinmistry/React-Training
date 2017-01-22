@@ -1955,7 +1955,7 @@ ReactDOM.render(
 )
 ```
 
-## Avoiding `store` in global scope by passing it via `props`
+## Avoiding `store` in global scope by passing it explicitly via `props`
 #### main.js
 ```js
 //const store = createStore(todoApp)

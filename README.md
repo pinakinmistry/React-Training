@@ -2251,3 +2251,29 @@ ReactDOM.render(
 npm install react-redux --save
 ```
 
+# Generating container component using `connect` method from `react-redux` package
+
+## Generating `VisibleTodoList` by `connect`ing Redux's `store` and `dispatch` to `TodoList` presentational component
+#### main.js
+```js
+const mapStateToProps = (state) => {
+    return {
+        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onTodoClick: (id) =>
+            dispatch({
+                type: 'TOGGLE_TODO',
+                id
+            })
+    }
+}
+
+const VisibleTodoList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList)
+```

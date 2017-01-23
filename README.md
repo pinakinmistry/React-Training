@@ -2353,3 +2353,72 @@ const FilterLink = connect(
     mapDispatchToLinkProps
 )(Link)
 ```
+
+## Extracting action creators
+#### main.js
+```js
+const addTodo = (text) => ({
+    type: 'ADD_TODO',
+    id: todoId++,
+    text
+})
+
+const toggleTodo = (id) => ({
+    type: 'TOGGLE_TODO',
+    id
+})
+
+const setVisibilityFilter = (filter) => ({
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+})
+
+let AddTodo = ({dispatch}) => {
+    let input;
+    return (
+        <div>
+            <input ref={node => { input = node }}/>
+            <button onClick={() => {
+                dispatch(addTodo(input.value))
+                input.value = ''
+            }}>Add Tasks</button>
+        </div>
+    )
+}
+AddTodo = connect()(AddTodo)
+
+
+const mapStateToTodoListProps = (state) => {
+    return {
+        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    }
+}
+const mapDispatchToTodoListProps = (dispatch) => {
+    return {
+        onTodoClick: (id) =>
+            dispatch(toggleTodo(id))
+    }
+}
+const VisibleTodoList = connect(
+    mapStateToTodoListProps,
+    mapDispatchToTodoListProps
+)(TodoList)
+
+
+const mapStateToLinkProps = (state, ownProps) => {
+    return {
+        active: ownProps.filter === state.visibilityFilter
+    }
+}
+const mapDispatchToLinkProps = (dispatch, ownProps) => {
+    return {
+        onClick: () => {
+            dispatch(setVisibilityFilter(ownProps.filter))
+        }
+    }
+}
+const FilterLink = connect(
+    mapStateToLinkProps,
+    mapDispatchToLinkProps
+)(Link)
+```

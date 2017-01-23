@@ -173,20 +173,20 @@ Footer.contextTypes = {
     store: React.PropTypes.object
 }
 
-const mapStateToProps = (state) => {
+const mapStateToTodoListProps = (state) => {
     return {
         todos: getVisibleTodos(state.todos, state.visibilityFilter)
     }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToTodoListProps = (dispatch) => {
     return {
         onTodoClick: (id) =>
             dispatch(toggleTodo(id))
     }
 }
 const VisibleTodoList = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToTodoListProps,
+    mapDispatchToTodoListProps
 )(TodoList)
 
 let todoId = 0;

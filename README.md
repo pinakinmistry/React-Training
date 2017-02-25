@@ -6,7 +6,7 @@
 - JavaScript
 
 ### What is React?
-- A JavaScript library for building user interface 
+- A JavaScript library for building user interface
 - HTML is written in JavaScript without using HTML ;-)
 - Declarative
 - Functional
@@ -195,7 +195,7 @@ module.export = {
 ```js
 import React from 'react'
 
-//Component name should start with capital letter 
+//Component name should start with capital letter
 const App = React.createClass({
 	render: function () {
 		return <h1>My First React Component</h1>
@@ -469,7 +469,7 @@ const App = React.createClass({
 			<div>
 				<h1>{this.props.header}</h1>
 				<input
-					value={this.state.input} 
+					value={this.state.input}
 					onChange={this.onChange}
 				/>
 			</div>
@@ -500,7 +500,7 @@ class App extends React.Component {
 			<div>
 				<h1>{this.props.header}</h1>
 				<input
-					value={this.state.input} 
+					value={this.state.input}
 					onChange={this.onChange.bind(this)}
 				/>
 				<h2>{this.state.input}</h2>
@@ -549,7 +549,7 @@ class App extends React.Component {
 					onChange={this.onChange.bind(this)} />
 				<button onClick={this.onAddTask.bind(this)}>Add</button>
 				<ul>
-					{this.state.tasks.map((task) => 
+					{this.state.tasks.map((task) =>
 						<li><label><input type="checkbox" /> {task}</label></li>)}
 				</ul>
 			</div>
@@ -606,7 +606,7 @@ class App extends React.Component {
 					onChange={this.onChange.bind(this)} />
 				<button onClick={this.onAddTask.bind(this)}>Add</button>
 				<ul>
-					{this.state.tasks.map((task, i) => 
+					{this.state.tasks.map((task, i) =>
 						<li>
 							<label>
 								<input type="checkbox"
@@ -949,7 +949,7 @@ ReactDOM.render(
 - Store is created using `Redux.createStore` by providing a reducer function as input
 - State can be changed only by dispatching action to the store
 - Reducer function takes existing state and action and returns new state based on the action
-- Action is minimal plain JavaScript object with `type` property defining the action 
+- Action is minimal plain JavaScript object with `type` property defining the action
 - Internally reducer function gets called on dispatch of action which then returns a new state
 - All listeners subscribed to store gets called after reducer function completes
 
@@ -981,7 +981,7 @@ expect(counter(2, { type: 'DECREMENT' })).toEqual(1)
 expect(counter(1, { type: 'DECREMENT' })).toEqual(0)
 
 console.log('All tests passed');
-``` 
+```
 
 ## Redux store method: `getState`, `dispatch` and `subscribe`
 #### main.js
@@ -1167,7 +1167,7 @@ const testToggleTodo = () => {
 
 testToggleTodo()
 console.log('All tests passed')
-``` 
+```
 
 ## Implement Todos reducer with a test:
 #### main.js
@@ -1200,7 +1200,7 @@ const testTodos = () => {
         text: 'Learn Redux',
         completed: false
     }]
-    
+
     deepFreeze(todosBefore)
     deepFreeze(action)
 
@@ -1288,7 +1288,7 @@ console.log('All tests passed')
 - Split a reducer when it handles multiple concerns
 - `todos` reducer is currently handling both `todos` array as well as individual `todo`
 - Individual todo related logic can be splitted into a new reducer named `todo`
-- Splitting and combining reducers is called Reducer Composition. 
+- Splitting and combining reducers is called Reducer Composition.
 
 #### main.js
 ```js
@@ -1518,9 +1518,9 @@ const getVisibleTodos = (todos, filter) => {
     switch(filter) {
         case 'SHOW_ALL':
             return todos
-        case 'SHOW_ACTIVE': 
+        case 'SHOW_ACTIVE':
             return todos.filter(todo => !todo.completed)
-        case 'SHOW_COMPLETED': 
+        case 'SHOW_COMPLETED':
             return todos.filter(todo => todo.completed)
     }
 }
@@ -1642,8 +1642,8 @@ class TodoApp extends Component {
                     })}
                 />
 ...
-``` 
-## Presentational Component vs Container Component 
+```
+## Presentational Component vs Container Component
 ### Presentational Component
 - Takes data as input
 - Takes methods as input
@@ -1742,7 +1742,7 @@ class TodoApp extends Component {
                     })}
                 />
                 <Footer
-                    visibilityFilter={visibilityFilter} 
+                    visibilityFilter={visibilityFilter}
                     onFilterClick={(filter) => {
                         store.dispatch({
                             type: 'SET_VISIBILITY_FILTER',
@@ -1776,7 +1776,7 @@ const TodoApp = ({todos, visibilityFilter}) => (
             })}
         />
         <Footer
-            visibilityFilter={visibilityFilter} 
+            visibilityFilter={visibilityFilter}
             onFilterClick={(filter) => {
                 store.dispatch({
                     type: 'SET_VISIBILITY_FILTER',
@@ -1825,7 +1825,7 @@ class FilterLink extends Component {
         const state = store.getState()
 
         return (
-            <Link 
+            <Link
                 active={props.filter === state.visibilityFilter}
                 onClick={() => store.dispatch({
                     type: 'SET_VISIBILITY_FILTER',
@@ -1936,7 +1936,7 @@ const TodoApp = ({todos, visibilityFilter}) => (
         <Footer />
     </div>
 )
-``` 
+```
 
 ## Refactor `TodoApp` and remove subscription to render on state change:
 #### main.js
@@ -2005,7 +2005,7 @@ class FilterLink extends Component {
         const state = store.getState()
 
         return (
-            <Link 
+            <Link
                 active={props.filter === state.visibilityFilter}
                 onClick={() => store.dispatch({
                     type: 'SET_VISIBILITY_FILTER',
@@ -2136,7 +2136,7 @@ class FilterLink extends Component {
         const state = store.getState()
 
         return (
-            <Link 
+            <Link
                 active={props.filter === state.visibilityFilter}
                 onClick={() => store.dispatch({
                     type: 'SET_VISIBILITY_FILTER',
@@ -2421,4 +2421,27 @@ const FilterLink = connect(
     mapStateToLinkProps,
     mapDispatchToLinkProps
 )(Link)
+```
+
+## Simplifying arrow functions:
+#### main.js
+```js
+const mapStateToLinkProps = (state, ownProps) => ({
+    active: ownProps.filter === state.visibilityFilter
+})
+
+const mapDispatchToLinkProps = (dispatch, ownProps) => ({
+    onClick() {
+        dispatch(setVisibilityFilter(ownProps.filter))
+     }
+})
+
+const mapStateToTodoListProps = (state) => ({
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+})
+const mapDispatchToTodoListProps = (dispatch) => ({
+    onTodoClick(id) {
+        dispatch(toggleTodo(id))
+     }
+})
 ```

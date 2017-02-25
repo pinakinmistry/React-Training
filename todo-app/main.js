@@ -54,9 +54,9 @@ const getVisibleTodos = (todos, filter) => {
     switch(filter) {
         case 'SHOW_ALL':
             return todos
-        case 'SHOW_ACTIVE': 
+        case 'SHOW_ACTIVE':
             return todos.filter(todo => !todo.completed)
-        case 'SHOW_COMPLETED': 
+        case 'SHOW_COMPLETED':
             return todos.filter(todo => todo.completed)
     }
 }
@@ -126,18 +126,14 @@ const Link = ({active, children, onClick}) => {
     )
 }
 
-const mapStateToLinkProps = (state, ownProps) => {
-    return {
-        active: ownProps.filter === state.visibilityFilter
+const mapStateToLinkProps = (state, ownProps) => ({
+    active: ownProps.filter === state.visibilityFilter
+})
+const mapDispatchToLinkProps = (dispatch, ownProps) => ({
+    onClick() {
+        dispatch(setVisibilityFilter(ownProps.filter))
     }
-}
-const mapDispatchToLinkProps = (dispatch, ownProps) => {
-    return {
-        onClick: () => {
-            dispatch(setVisibilityFilter(ownProps.filter))
-        }
-    }
-}
+})
 const FilterLink = connect(
     mapStateToLinkProps,
     mapDispatchToLinkProps
@@ -173,17 +169,14 @@ Footer.contextTypes = {
     store: React.PropTypes.object
 }
 
-const mapStateToTodoListProps = (state) => {
-    return {
-        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+const mapStateToTodoListProps = (state) => ({
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+})
+const mapDispatchToTodoListProps = (dispatch) => ({
+    onTodoClick(id) {
+        dispatch(toggleTodo(id))
     }
-}
-const mapDispatchToTodoListProps = (dispatch) => {
-    return {
-        onTodoClick: (id) =>
-            dispatch(toggleTodo(id))
-    }
-}
+})
 const VisibleTodoList = connect(
     mapStateToTodoListProps,
     mapDispatchToTodoListProps

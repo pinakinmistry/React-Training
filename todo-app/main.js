@@ -82,6 +82,8 @@ const TodoList = ({todos, onTodoClick}) => (
     </ul>
 )
 
+let todoId = 0;
+
 const addTodo = (text) => ({
     type: 'ADD_TODO',
     id: todoId++,
@@ -139,35 +141,29 @@ const FilterLink = connect(
     mapDispatchToLinkProps
 )(Link)
 
-const Footer = (props, {store}) => (
+const Footer = () => (
     <p>
         Show:
         {' '}
         <FilterLink
             filter="SHOW_ALL"
-            store={store}
         >
             All
         </FilterLink>
         {' '}
         <FilterLink
             filter="SHOW_ACTIVE"
-            store={store}
          >
             Active
         </FilterLink>
         {' '}
         <FilterLink
             filter="SHOW_COMPLETED"
-            store={store}
          >
             Completed
         </FilterLink>
     </p>
 )
-Footer.contextTypes = {
-    store: React.PropTypes.object
-}
 
 const mapStateToTodoListProps = (state) => ({
     todos: getVisibleTodos(state.todos, state.visibilityFilter)
@@ -182,7 +178,6 @@ const VisibleTodoList = connect(
     mapDispatchToTodoListProps
 )(TodoList)
 
-let todoId = 0;
 const todoApp = combineReducers({
     todos,
     visibilityFilter
@@ -196,17 +191,7 @@ const TodoApp = () => (
     </div>
 )
 
-const persistedState = {
-    todos: [
-        {
-            id: 0,
-            text: 'Persisted task!',
-            completed: false
-        }
-    ]
-}
-
-const store = createStore(todoApp, persistedState)
+const store = createStore(todoApp)
 
 ReactDOM.render(
     <Provider store={store}>

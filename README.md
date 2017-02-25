@@ -328,6 +328,7 @@ const App = (props) => <h1>{props.header}</h1>
 
 export default App
 ```
+> We need to import React even if it is functional component
 
 ## What if `props` are not passed?
 

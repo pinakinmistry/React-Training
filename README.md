@@ -2423,7 +2423,7 @@ const FilterLink = connect(
 )(Link)
 ```
 
-## Simplifying arrow functions:
+## Simplifying arrow functions
 #### main.js
 ```js
 const mapStateToLinkProps = (state, ownProps) => ({
@@ -2444,4 +2444,27 @@ const mapDispatchToTodoListProps = (dispatch) => ({
         dispatch(toggleTodo(id))
      }
 })
+```
+
+## Supplying initial state to Redux `store`; Hydrating persisted state
+#### main.js
+```js
+const persistedState = {
+    todos: [
+        {
+            id: 0,
+            text: 'Persisted task!',
+            completed: false
+        }
+    ]
+}
+
+const store = createStore(todoApp, persistedState)
+
+ReactDOM.render(
+    <Provider store={store}>
+        <TodoApp />
+    </Provider>,
+    document.getElementById('app')
+)
 ```

@@ -196,8 +196,20 @@ const TodoApp = () => (
     </div>
 )
 
+const persistedState = {
+    todos: [
+        {
+            id: 0,
+            text: 'Persisted task!',
+            completed: false
+        }
+    ]
+}
+
+const store = createStore(todoApp, persistedState)
+
 ReactDOM.render(
-    <Provider store={createStore(todoApp)}>
+    <Provider store={store}>
         <TodoApp />
     </Provider>,
     document.getElementById('app')

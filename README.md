@@ -2469,3 +2469,25 @@ ReactDOM.render(
     document.getElementById('app')
 )
 ```
+
+# Structuring the App with reducers, actions and components folders:
+
+```
+src
+ |--actions
+ |    |--index.js
+ |--components
+ |    |--AddTodo.js
+ |    |--App.js
+ |    |--FilterLink.js
+ |    |--Footer.js
+ |    |--Link.js
+ |    |--Todo.js
+ |    |--TodoList.js
+ |    |--VisibleTodoList.js
+ |--reducers
+ |    |--index.js
+ |    |--todos.js
+ |    |--visibilityFilter.js
+ |--index.js //Entry file
+```

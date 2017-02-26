@@ -2499,7 +2499,7 @@ src
 ## Actions
 
 
-## Persisting state to localStorage and using `node-uuid` for `todo`s `id`
+## Persisting state to localStorage and using `node-uuid` for `todo`'s `id`
 #### ./index.js
 ```js
 import { loadState, saveState } from './localStorage'

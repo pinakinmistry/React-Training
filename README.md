@@ -2491,3 +2491,60 @@ src
  |    |--visibilityFilter.js
  |--index.js //Entry file
 ```
+
+## Reducers first
+
+## Components
+
+## Actions
+
+
+## Persisting state to localStorage and using `node-uuid` for `todo`s `id`
+#### ./index.js
+```js
+import { loadState, saveState } from './localStorage'
+import throttle from 'lodash/throttle'
+
+const persistedState = loadState()
+const store = createStore(todoApp, persistedState)
+store.subscribe(throttle(() => {
+    saveState({
+        todos: store.getState().todos
+    })
+}, 2000))
+```
+
+#### ./localStorage.js
+```js
+export const loadState = () => {
+    try {
+        const serializedState = localStorage.getItem('state')
+        if(serializedState === null) {
+            return undefined
+        }
+        return JSON.parse(serializedState)
+    } catch (err) {
+        return undefined
+    }
+}
+
+export const saveState = (state) => {
+    try {
+        const serializedState = JSON.stringify(state)
+        localStorage.setItem('state', serializedState)
+    } catch (err) {
+        console.error(err)
+    }
+}
+```
+
+#### ./actions/index.js
+```js
+import { v4 } from 'node-uuid'
+
+export const addTodo = (text) => ({
+    type: 'ADD_TODO',
+    id: v4(),
+    text
+})
+```

@@ -2548,3 +2548,56 @@ export const addTodo = (text) => ({
     text
 })
 ```
+
+## Refactoring entry point `index.js`
+#### ./index.js
+```js
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import configureStore from './configureStore'
+import Root from './components/Root'
+
+const store = configureStore()
+
+ReactDOM.render(
+    <Root store={store} />,
+    document.getElementById('app')
+)
+```
+
+#### ./configureStore.js
+```js
+import { loadState, saveState } from './localStorage'
+import throttle from 'lodash/throttle'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+
+const configureStore = () => {
+    const persistedState = loadState()
+    const store = createStore(todoApp, persistedState)
+    store.subscribe(throttle(() => {
+        saveState({
+            todos: store.getState().todos
+        })
+    }, 2000))
+
+    return store
+}
+
+export default configureStore
+```
+
+#### ./components/Root.js
+```js
+import React from 'react'
+import { Provider } from 'react-redux'
+import TodoApp from './App'
+
+const Root = ({store}) => (
+    <Provider store={store}>
+        <TodoApp />
+    </Provider>
+)
+
+export default Root
+```

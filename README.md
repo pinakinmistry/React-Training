@@ -2729,3 +2729,39 @@ const todoApp = combineReducers({
     todos,
 })
 ```
+
+## Injecting `params` using `withRouter` from `react-router` instead of passing it from top
+
+> Ensure we have `react-router` 3.x or above
+
+#### Remove `params` from TodoApp
+```js
+const TodoApp = () => (
+    <div>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
+    </div>
+)
+```
+
+#### Use `withRouter` to inject `params` into VisibleTodoList component
+```js
+import { withRouter } from 'react-router'
+
+const mapStateToProps = (state, ownProps) => ({
+    todos: getVisibleTodos(state.todos, ownProps.params.filter || 'all')
+})
+
+//or
+
+const mapStateToProps = (state, { params }) => ({
+    todos: getVisibleTodos(state.todos, params.filter || 'all')
+})
+
+const VisibleTodoList = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList))
+```
+

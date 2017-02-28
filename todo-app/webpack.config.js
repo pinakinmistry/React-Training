@@ -6,7 +6,10 @@ module.exports = {
     },
     devServer: {
         inline: true,
-        port: 3333
+        port: 3333,
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
     module: {
         loaders: [

@@ -2805,7 +2805,7 @@ export const getVisibleTodos = (state, filter) => {
 }
 ```
 
-#### Define a selector `getVisibleTodos` in root reducer and call getVisibleTodos from `todos` reducer passing only state.todos to it
+#### Define `getVisibleTodos` selector in root reducer and call getVisibleTodos from `todos` reducer passing only state.todos to it
 ```js
 import { combineReducers } from 'redux'
 import todos, * as fromTodos from './todos'

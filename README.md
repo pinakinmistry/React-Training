@@ -2654,3 +2654,14 @@ export default FilterLink
 ```
 
 #### Remove setVisibilityFilter action creator and Link component
+
+#### Serve index.html independent of the url by adding below in webpack.config.js
+```js
+devServer: {
+    inline: true,
+    port: 3333,
+    historyApiFallback: {
+        index: 'index.html'
+    }
+}
+```

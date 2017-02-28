@@ -2653,8 +2653,6 @@ const FilterLink = ({filter, children}) => {
 export default FilterLink
 ```
 
-#### Remove setVisibilityFilter action creator and Link component
-
 #### Serve index.html independent of the url by adding below in webpack.config.js
 ```js
 devServer: {
@@ -2665,6 +2663,8 @@ devServer: {
     }
 }
 ```
+
+#### Remove setVisibilityFilter action creator and Link component
 
 ## Filtering Redux's state using `react-router`'s `params`
 #### Adding `params` as input to TodoApp component and passing `params.filter` to VisibleTodoList

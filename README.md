@@ -2667,7 +2667,7 @@ devServer: {
 ```
 
 ## Filtering Redux's state using `react-router`'s `params`
-#### Adding params as input to TodoApp component
+#### Adding `params` as input to TodoApp component and passing `params.filter` to VisibleTodoList
 ```js
 const TodoApp = ({params}) => (
     <div>
@@ -2678,7 +2678,7 @@ const TodoApp = ({params}) => (
 )
 ```
 
-#### Reflecting `filter` as input in visibleTodoList component
+#### Reflecting `filter` as input in VisibleTodoList component
 ```js
 const getVisibleTodos = (todos, filter) => {
     switch(filter) {

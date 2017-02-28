@@ -2620,3 +2620,37 @@ const Root = ({store}) => (
 
 export default Root
 ```
+
+## Navigating with `react-router`'s `Link`
+#### Adding option filter `params` in ./components/Root.js
+```js
+const Root = ({store}) => (
+    <Provider store={store}>
+        <Router history={browserHistory}>
+            <Route path='/(:filter)' component={TodoApp} />
+        </Router>
+    </Provider>
+)
+```
+
+#### Rewriting FilterLink component using Link from react-router
+```js
+import React from 'react'
+import { Link } from 'react-router'
+
+const FilterLink = ({filter, children}) => {
+    return (
+        <Link to={filter === 'all' ? '' : filter}
+            activeStyle={{
+                textDecoration: 'none',
+                color: 'black'
+            }}>
+            {children}
+        </Link>
+    )
+}
+
+export default FilterLink
+```
+
+#### Remove setVisibilityFilter action creator and Link component

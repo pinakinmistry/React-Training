@@ -2773,3 +2773,58 @@ const VisibleTodoList = withRouter(connect(
     { onTodoClick: toggleTodo }
 )(TodoList))
 ```
+
+## Collocating selectors with reducers
+#### Move getVisibleTodos from VisibleTodoList component to todos reducer
+```js
+const todos = (state = [], action) => {
+    switch(action.type)  {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                todo(undefined, action)
+            ]
+        case 'TOGGLE_TODO':
+            return state.map(t => todo(t, action))
+        default:
+            return state
+    }
+}
+
+export default todos
+
+export const getVisibleTodos = (state, filter) => {
+    switch(filter) {
+        case 'all':
+            return state
+        case 'active':
+            return state.filter(todo => !todo.completed)
+        case 'completed':
+            return state.filter(todo => todo.completed)
+    }
+}
+```
+
+#### Define a selector `getVisibleTodos` in root reducer and call getVisibleTodos from `todos` reducer passing only state.todos to it
+```js
+import { combineReducers } from 'redux'
+import todos, * as fromTodos from './todos'
+
+const todoApp = combineReducers({
+    todos,
+})
+
+export default todoApp
+
+export const getVisibleTodos = (state, filter) =>
+    fromTodos.getVisibleTodos(state.todos, filter)
+```
+
+#### Call selector from root reducer in VisibleTodoList passing entire `state` to it
+```js
+import { getVisibleTodos } from '../reducers'
+
+const mapStateToProps = (state, {params}) => ({
+    todos: getVisibleTodos(state, params.filter || 'all')
+})
+```

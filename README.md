@@ -2765,3 +2765,11 @@ const VisibleTodoList = withRouter(connect(
 )(TodoList))
 ```
 
+## Using `mapDispatchToProps` shorthand notation
+#### VisibleTodoList.js
+```js
+const VisibleTodoList = withRouter(connect(
+    mapStateToProps,
+    { onTodoClick: toggleTodo }
+)(TodoList))
+```

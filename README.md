@@ -2665,3 +2665,67 @@ devServer: {
     }
 }
 ```
+
+## Filtering Redux's state using `react-router`'s `params`
+#### Adding params as input to TodoApp component
+```js
+const TodoApp = ({params}) => (
+    <div>
+        <AddTodo />
+        <VisibleTodoList filter={params.filter || 'all'}/>
+        <Footer />
+    </div>
+)
+```
+
+#### Reflecting `filter` as input in visibleTodoList component
+```js
+const getVisibleTodos = (todos, filter) => {
+    switch(filter) {
+        case 'all':
+            return todos
+        case 'active':
+            return todos.filter(todo => !todo.completed)
+        case 'completed':
+            return todos.filter(todo => todo.completed)
+    }
+}
+
+const mapStateToProps = (state, props) => ({
+    todos: getVisibleTodos(state.todos, props.filter)
+})
+```
+
+#### Reflecting `filter` values in Footer component
+```js
+const Footer = () => (
+    <p>
+        Show:
+        {' '}
+        <FilterLink
+            filter="all"
+        >
+            All
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="active"
+         >
+            Active
+        </FilterLink>
+        {' '}
+        <FilterLink
+            filter="completed"
+         >
+            Completed
+        </FilterLink>
+    </p>
+)
+```
+
+#### Removing visibilityFilter reducer from ./reducers/index.js
+```js
+const todoApp = combineReducers({
+    todos,
+})
+```

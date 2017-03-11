@@ -6,8 +6,6 @@ import { toggleTodo } from '../actions'
 import { getVisibleTodos } from '../reducers'
 import { fetchTodos } from '../api'
 
-
-
 class VisibleTodoList extends Component {
     componentDidMount() {
         fetchTodos(this.props.filter).then(todos => console.log(todos))

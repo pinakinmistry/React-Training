@@ -2958,3 +2958,5 @@ import { fetchTodos } from './api'
 fetchTodos('all').then(todos => console.log(todos))
 ...
 ```
+
+# Promise

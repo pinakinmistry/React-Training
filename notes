@@ -1,0 +1,10 @@
+reducers = (currentState = {}, action) => nextState
+
+store = createStore(reducers)
+
+store.dispatch(action) -> reducers()
+
+
+
+
+

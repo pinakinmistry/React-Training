@@ -3165,3 +3165,27 @@ const configureStore = () => {
     wrapDispatchWithMiddlewares(store, middlewares)
 ...
 ```
+
+## Applying redux middlewares:
+#### ./configureStore.js
+```js
+...
+import { createStore, applyMiddleware } from 'redux'
+import promise from 'redux-promise'
+import createLogger from 'redux-logger'
+import todoApp from './reducers'
+
+const configureStore = () => {
+    const persistedState = loadState()
+    const middlewares = [promise]
+
+    if(process.env.NODE_ENV !== 'production') {
+        middlewares.push(createLogger())
+    }
+
+    const store = createStore(
+        todoApp,
+        applyMiddleware(...middlewares)
+    )
+...
+```

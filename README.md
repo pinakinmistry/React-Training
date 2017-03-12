@@ -3167,6 +3167,12 @@ const configureStore = () => {
 ```
 
 ## Applying redux middlewares:
+
+```
+npm i --save redux-promise
+npm i --save redux-logger
+```
+
 #### ./configureStore.js
 ```js
 ...

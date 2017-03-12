@@ -3063,3 +3063,59 @@ VisibleTodoList = withRouter(connect(
 
 export default VisibleTodoList
 ```
+
+## Wrapping `dispatch` to handle `Promise` and support async action
+#### ./components/VisibleTodoList.js
+```js
+...
+fetchData() {
+    const { filter, fetchTodos } = this.props
+    fetchTodos(filter)
+}
+...
+```
+
+#### ./actions/index.js
+```js
+...
+import * as api from '../api'
+
+const receiveTodos = (filter, response) => ({
+    type: 'RECEIVE_TODOS',
+    filter,
+    response
+})
+
+export const fetchTodos = (filter) =>
+api.fetchTodos(filter).then(response =>
+    receiveTodos(filter, response)
+)
+...
+```
+
+### configureStore.js
+```js
+...
+const addPromiseSupportToDispatch = (store) => {
+    const rawDispatch = store.dispatch
+    return (action) => {
+        if(typeof action.then === 'function') {
+            return action.then(rawDispatch)
+        } else {
+            rawDispatch(action)
+        }
+    }
+}
+
+const configureStore = () => {
+    const persistedState = loadState()
+    const store = createStore(todoApp)
+
+    if(process.env.NODE_ENV !== 'production') {
+        store.dispatch = addLoggingToDispatch(store)
+    }
+
+    store.dispatch = addPromiseSupportToDispatch(store)
+...
+```
+

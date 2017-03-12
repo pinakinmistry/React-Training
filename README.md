@@ -3093,7 +3093,7 @@ api.fetchTodos(filter).then(response =>
 ...
 ```
 
-### configureStore.js
+#### configureStore.js
 ```js
 ...
 const addPromiseSupportToDispatch = (store) => {

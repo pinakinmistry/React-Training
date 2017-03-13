@@ -1,13 +1,18 @@
 import { loadState, saveState } from './localStorage'
 import throttle from 'lodash/throttle'
 import { createStore, applyMiddleware } from 'redux'
-import promise from 'redux-promise'
 import createLogger from 'redux-logger'
 import todoApp from './reducers'
 
+const thunk = (store) => (next) => (action) =>
+    typeof action === 'function' ?
+        action(store.dispatch) :
+        next(action)
+
+
 const configureStore = () => {
     const persistedState = loadState()
-    const middlewares = [promise]
+    const middlewares = [thunk]
 
     if(process.env.NODE_ENV !== 'production') {
         middlewares.push(createLogger())

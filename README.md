@@ -3487,3 +3487,52 @@ const configureStore = () => {
     const middlewares = [thunk]
 ...
 ```
+
+## Avoiding same action race conditions with thunk
+#### Increase delay in fetching todos in ./api/index.js
+```js
+...
+export const fetchTodos = (filter) =>
+    delay(5000).then(() => {
+...
+```
+
+#### ./actions/index.js
+```js
+...
+import { getIsFetching } from '../reducers'
+
+...
+
+export const fetchTodos = (filter) => (dispatch, getState) => {
+    if(getIsFetching(getState(), filter)) {
+        return Promise.resolve();
+    }
+
+    dispatch(requestTodos(filter))
+    return api.fetchTodos(filter).then(response =>
+        dispatch(receiveTodos(filter, response))
+    )
+}
+...
+```
+
+#### ./configureStore.js
+```js
+...
+const thunk = (store) => (next) => (action) =>
+    typeof action === 'function' ?
+        action(store.dispatch, store.getState) :
+        next(action)
+...
+```
+
+#### ./components/VisibleTodoList.js
+```js
+...
+fetchData() {
+    const { filter, fetchTodos } = this.props
+    fetchTodos(filter).then(() => console.log(`${filter} todos fetched`))
+}
+...
+```

@@ -3548,3 +3548,172 @@ npm i --save redux-thunk
 import thunk from 'redux-thunk'
 ...
 ```
+
+## Displaying error message
+#### Mimicking error in ./api/index.js
+```js
+...
+export const fetchTodos = (filter) =>
+    delay(3000).then(() => {
+        if(Math.random() > 0.5) {
+            throw new Error('Server not responding')
+        }
+...
+```
+
+#### Renaming actions and handling error in ./actions/index.js
+```js
+...
+export const fetchTodos = (filter) => (dispatch, getState) => {
+    if(getIsFetching(getState(), filter)) {
+        return Promise.resolve();
+    }
+
+    dispatch({
+        type: 'FETCH_TODOS_REQUEST',
+        filter,
+    })
+    return api.fetchTodos(filter).then(
+        response =>
+            dispatch({
+                type: 'FETCH_TODOS_SUCCESS',
+                filter,
+                response
+            })
+        , error =>
+            dispatch({
+                type: 'FETCH_TODOS_ERROR',
+                filter,
+                message: error.message
+            })
+    )
+}
+...
+```
+
+#### Reflecting renamed action in ./reducers/byId.js reducer:
+```js
+const byId = (state = {}, action) => {
+    switch(action.type) {
+        case 'FETCH_TODOS_SUCCESS':
+...
+```
+
+#### Reflecting renamed action and adding errorMessage reducer in ./reducers/createList.js
+```js
+...
+const createList = (filter) => {
+    const ids = (state = [], action) => {
+        if(action.filter !== filter) {
+        return state
+        }
+        switch(action.type) {
+            case 'FETCH_TODOS_SUCCESS':
+                return action.response.map(todo => todo.id)
+            default:
+                return state
+        }
+    }
+
+    const isFetching = (state = false, action) => {
+        if(action.filter !== filter) {
+            return state
+        }
+        switch(action.type) {
+            case 'FETCH_TODOS_REQUEST':
+                return true
+            case 'FETCH_TODOS_SUCCESS':
+            case 'FETCH_TODOS_ERROR':
+                return false
+            default:
+                return state
+        }
+    }
+
+    const errorMessage = (state = null, action) => {
+        if(action.filter !== filter) {
+            return state
+        }
+        switch (action.type) {
+            case 'FETCH_TODOS_ERROR':
+                return action.message
+            case 'FETCH_TODOS_SUCCESS':
+            case 'FETCH_TODOS_REQUEST':
+                return null
+            default:
+                return state
+        }
+    }
+
+    return combineReducers({
+        ids,
+        isFetching,
+        errorMessage
+    })
+}
+
+export default createList;
+...
+export const getErrorMessage = (state) => state.errorMessage
+```
+
+#### Adding getErrorMessage selector in ./reducers/index.js
+```js
+...
+export const getErrorMessage = (state, filter) =>
+    fromList.getErrorMessage(state.listByFilter[filter])
+```
+
+#### Adding a new `FetchError` component
+```js
+import React from 'react'
+
+const FetchError = ({ message, onRetry }) => (
+    <div>
+        <p>Something went wrong. {message}</p>
+        <button onClick={onRetry}>Retry</button>
+    </div>
+)
+
+export default FetchError
+```
+
+#### Use `FetchError` in `VisibleTodoList` to display error
+```js
+...
+import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers'
+import FetchError from './FetchError'
+
+class VisibleTodoList extends Component {
+    ...
+
+    render() {
+        const { toggleTodo, todos, isFetching, errorMessage } = this.props
+        if(isFetching && !todos.length) {
+            return <span>Loading...</span>
+        }
+        if(errorMessage && !todos.length) {
+            return (
+                <FetchError
+                        message={errorMessage}
+                        onRetry={() => this.fetchData()}
+                />
+            )
+        }
+
+        return (
+            <TodoList todos={todos} onTodoClick={toggleTodo} />
+        )
+    }
+}
+
+const mapStateToProps = (state, {params}) => {
+    const filter = params.filter || 'all'
+    return {
+        todos: getVisibleTodos(state, filter),
+        isFetching: getIsFetching(state, filter),
+        errorMessage: getErrorMessage(state, filter),
+        filter
+    }
+}
+```

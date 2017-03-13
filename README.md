@@ -3536,3 +3536,15 @@ fetchData() {
 }
 ...
 ```
+
+## Using `thunk` from `redux-thunk` npm package
+```
+npm i --save redux-thunk
+```
+
+#### ./configureStore.js
+```js
+...
+import thunk from 'redux-thunk'
+...
+```

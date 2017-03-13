@@ -3435,7 +3435,7 @@ export const getIsFetching = (state, filter) =>
     fromList.getIsFetching(state.listByFilter[filter])
 ```
 
-# Dispatching multiple actions asynchronuously with thunks
+# Dispatching multiple async actions with Thunks
 - A promise can express only one async value.
 - `fetchTodo` action creator returns a promise that resolves into `RECEIVE_TODO` action with response in it.
 - To dispatch multiple async actions, `REQUEST_TODO` before fetching todos and then dispatch `RECEIVE_TODO` after fetching todos, fetchTodo needs `dispatch` method.

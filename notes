@@ -1,8 +1,16 @@
+# Patterns
 reducers = (currentState = {}, action) => nextState
+
+rootReducer = combineReducers({
+    statePropName: reducerName
+})
+
+getSelector(subState, field, ...fields) => subState[field]
 
 store = createStore(reducers)
 
 store.dispatch(action) -> reducers()
+
 
 
 

@@ -3338,3 +3338,99 @@ export const getVisibleTodos = (state, filter) => {
     return ids.map(id => fromById.getTodo(state.byId, id))
 }
 ```
+
+## Adding `isFetching` to `createList`'s `state`
+#### ./actions/index.js
+```js
+...
+export const requestTodos = (filter) => ({
+    type: 'REQUEST_TODOS',
+    filter,
+})
+```
+
+#### ./components/VisibleTodoList.js
+```js
+...
+import { getVisibleTodos, getIsFetching } from '../reducers'
+...
+
+    fetchData() {
+        const { filter, fetchTodos, requestTodos } = this.props
+        requestTodos(filter)
+        fetchTodos(filter)
+    }
+
+    render() {
+        const { toggleTodo, todos, isFetching } = this.props
+        if(isFetching && !todos.length) {
+            return <span>Loading...</span>
+        }
+
+        return (
+            <TodoList todos={todos} onTodoClick={toggleTodo} />
+        )
+    }
+}
+
+const mapStateToProps = (state, {params}) => {
+    const filter = params.filter || 'all'
+    return {
+        todos: getVisibleTodos(state, filter),
+        isFetching: getIsFetching(state, filter),
+        filter
+    }
+}
+...
+```
+
+#### ./reducers/createList.js
+```js
+import { combineReducers } from 'redux'
+
+const createList = (filter) => {
+    const ids = (state = [], action) => {
+        if(action.filter !== filter) {
+        return state
+        }
+        switch(action.type) {
+            case 'RECEIVE_TODOS':
+                return action.response.map(todo => todo.id)
+            default:
+                return state
+        }
+    }
+
+    const isFetching = (state = false, action) => {
+        if(action.filter !== filter) {
+            return state
+        }
+        switch(action.type) {
+            case 'REQUEST_TODOS':
+                return true
+            case 'RECEIVE_TODOS':
+                return false
+            default:
+                return state
+        }
+    }
+
+    return combineReducers({
+        ids,
+        isFetching,
+    })
+}
+
+export default createList;
+
+export const getIds = (state) => state.ids
+
+export const getIsFetching = (state) => state.isFetching
+```
+
+#### ./reducers/index.js
+```js
+...
+export const getIsFetching = (state, filter) =>
+    fromList.getIsFetching(state.listByFilter[filter])
+```

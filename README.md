@@ -3434,3 +3434,12 @@ export const getIsFetching = (state) => state.isFetching
 export const getIsFetching = (state, filter) =>
     fromList.getIsFetching(state.listByFilter[filter])
 ```
+
+# Dispatching multiple actions asynchronuously with thunks
+- A promise can express only one async value.
+- `fetchTodo` action creator returns a promise that resolves into `RECEIVE_TODO` action with response in it.
+- To dispatch multiple async actions, `REQUEST_TODO` before fetching todos and then dispatch `RECEIVE_TODO` after fetching todos, fetchTodo needs `dispatch` method.
+- Instead of returning a promise, we can return a function that takes `dispatch` as input.
+- A function that takes other function as input is called **Thunk**
+- Thunk can dispatch both plain action object or other thunk as the injected `dispatch` function is already wrapped with middlewares.
+- Thunk middleware is a powerful composable way to express async action creators that need to emit several actions during an async operation.

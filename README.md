@@ -3443,3 +3443,47 @@ export const getIsFetching = (state, filter) =>
 - A function that takes other function as input is called **Thunk**
 - Thunk can dispatch both plain action object or other thunk as the injected `dispatch` function is already wrapped with middlewares.
 - Thunk middleware is a powerful composable way to express async action creators that need to emit several actions during an async operation.
+
+#### ./components/VisibleTodoList.js
+```js
+...
+fetchData() {
+    const { filter, fetchTodos } = this.props
+    fetchTodos(filter)
+}
+...
+```
+
+#### ./actions/index.js
+```js
+...
+const requestTodos = (filter) => ({
+    type: 'REQUEST_TODOS',
+    filter,
+})
+
+...
+
+export const fetchTodos = (filter) => (dispatch) => {
+    dispatch(requestTodos(filter))
+    api.fetchTodos(filter).then(response =>
+        dispatch(receiveTodos(filter, response))
+    )
+}
+...
+```
+
+#### ./configureStore.js
+```js
+...
+const thunk = (store) => (next) => (action) =>
+    typeof action === 'function' ?
+        action(store.dispatch) :
+        next(action)
+
+
+const configureStore = () => {
+    const persistedState = loadState()
+    const middlewares = [thunk]
+...
+```

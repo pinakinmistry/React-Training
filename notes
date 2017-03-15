@@ -1,4 +1,10 @@
 # Patterns
+ReactComponent = function(props) {
+    const state = {}
+    return <View>
+}
+
+
 reducers = (currentState = {}, action) => nextState
 
 rootReducer = combineReducers({

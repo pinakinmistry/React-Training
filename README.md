@@ -3717,3 +3717,84 @@ const mapStateToProps = (state, {params}) => {
     }
 }
 ```
+
+## Creating data on `fakeDatabase`
+#### ./api/index.js
+```js
+...
+export const addTodo = (text) =>
+    delay(500).then(() => {
+        const todo = {
+            id: v4(),
+            text,
+            completed: false
+        }
+        fakeDatabase.todos.push(todo)
+        return todo
+    })
+
+export const toggleTodo = (id) =>
+    delay(500).then(() => {
+        const todo = fakeDatabase.todos.find(t => t.id === id)
+        todo.completed = !todo.completed
+        return todo
+    })
+```
+
+#### ./actions/index.js
+```js
+...
+export const addTodo = (text) => (dispatch) => {
+    return api.addTodo(text).then(
+        response =>
+            dispatch({
+                type: 'ADD_TODO_SUCCESS',
+                response
+            })
+    )
+}
+...
+```
+
+#### ./reducers/byId.js
+```js
+const byId = (state = {}, action) => {
+    switch(action.type) {
+        case 'FETCH_TODOS_SUCCESS':
+            const nextState = { ...state }
+            action.response.forEach(todo => {
+                nextState[todo.id] = todo
+            })
+            return nextState
+        case 'ADD_TODO_SUCCESS':
+            return {
+                ...state,
+                [action.response.id]: action.response
+            }
+        default:
+            return state
+    }
+}
+...
+```
+
+#### ./reducers/createList.js
+```js
+...
+const createList = (filter) => {
+    const ids = (state = [], action) => {
+        switch(action.type) {
+            case 'FETCH_TODOS_SUCCESS':
+                return filter === action.filter ?
+                    action.response.map(todo => todo.id) :
+                    state
+            case 'ADD_TODO_SUCCESS':
+                return filter !== 'completed' ?
+                    [...state, action.response.id] :
+                    state
+            default:
+                return state
+        }
+    }
+...
+```

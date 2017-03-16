@@ -3798,3 +3798,104 @@ const createList = (filter) => {
     }
 ...
 ```
+
+## Normalizing api responses using normalizr npm package:
+```
+npm i --save normalizr
+```
+
+#### ./actions/schema.js
+```js
+import { schema, arrayOf } from 'normalizr'
+
+export const todo = new schema.Entity('todos')
+export const arrayOfTodos = new schema.Array(todo)
+```
+
+#### ./actions/index.js
+```js
+import { normalize } from 'normalizr'
+import * as schema from './schema'
+...
+
+export const fetchTodos = (filter) => (dispatch, getState) => {
+    if(getIsFetching(getState(), filter)) {
+        return Promise.resolve();
+    }
+
+    dispatch({
+        type: 'FETCH_TODOS_REQUEST',
+        filter,
+    })
+    return api.fetchTodos(filter).then(
+        response => {
+            console.log(
+                'normalize response',
+                normalize(response, schema.arrayOfTodos)
+            )
+            dispatch({
+                    type: 'FETCH_TODOS_SUCCESS',
+                    filter,
+                    response: normalize(response, schema.arrayOfTodos)
+                })
+            , error =>
+                dispatch({
+                    type: 'FETCH_TODOS_ERROR',
+                    filter,
+                    message: error.message
+                })
+        }
+    )
+}
+
+export const addTodo = (text) => (dispatch) => {
+    return api.addTodo(text).then(
+        response => {
+            console.log(
+                'noramized response',
+                normalize(response, schema.todo)
+            )
+            dispatch({
+                type: 'ADD_TODO_SUCCESS',
+                response: normalize(response, schema.todo)
+            })
+        }
+    )
+}
+...
+```
+
+#### ./reducers/byId.js
+```js
+const byId = (state = {}, action) => {
+    if(action.response) {
+        return {
+            ...state,
+            ...action.response.entities.todos
+        }
+    }
+    return state
+}
+...
+```
+
+#### ./reducers/createList.js
+```js
+...
+const createList = (filter) => {
+    const ids = (state = [], action) => {
+        switch(action.type) {
+            case 'FETCH_TODOS_SUCCESS':
+                return filter === action.filter ?
+                    action.response.result :
+                    state
+            case 'ADD_TODO_SUCCESS':
+                return filter !== 'completed' ?
+                    [...state, action.response.result] :
+                    state
+            default:
+                return state
+        }
+    }
+...
+```

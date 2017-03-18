@@ -1048,6 +1048,8 @@ const createStore = (reducer) => {
 }
 ```
 
+> NOTE: createStore internally calls dispatch with an empty action object to initialize the state with defaults set in reducer
+
 ## Implementing Counter as a React component
 #### main.js
 ```js
@@ -1417,6 +1419,8 @@ const combineReducers = (reducers) => {
     }
 }
 ```
+
+> Note: A dipatched action goes through all reducers that are combined into one reducer.
 
 ## TodoApp with `ADD_TODO` action `dispatch`ed to Redux `store`
 #### main.js

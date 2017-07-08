@@ -5,7 +5,7 @@
 - CSS
 - JavaScript
 
-### What is React?
+## What is React?
 - A JavaScript library for building user interface
 - HTML is written in JavaScript without using HTML ;-)
 - Declarative (says `What` to do instead of `How` to do)
@@ -13,14 +13,14 @@
 - Component based (instead of following MVC pattern)
 - Virtual DOM (in memory replica of actual DOM)
 
-### What it's not?
+## What it's not?
 - Not a framework (Batteries not included)
 - Doesn't cover anything other than view, not even model or routing
 - Controller ??? (Component controls itself)
 - It outsources client side routing to npm package `react-router`
 - It outsources model/state management to npm packages like `react-redux`, `flux`, etc.
 
-### MVC in View is not appropriate
+## MVC in View is not appropriate
 - MVC works well in overall client server model wherein View is the client/frontend
 - MVC pattern was first introduced in frontend by Backbone (MVC in View)
 - Component pattern introduced by [Web Components](https://en.wikipedia.org/wiki/Web_Components) is more suitable in frontend due to its characteristics like composibility, resuability, custom elements, shadow DOM, etc.
@@ -28,7 +28,7 @@
 - Some behavior/update can be difficult to debug/reason about
 - Components address these issues very well
 
-### How React works?
+## How React works?
 - Views are written in form of JavaScript functions
 - User interface and user interaction are written declaratively in form of components
 - App then becomes a tree of components and sub components
@@ -38,13 +38,13 @@
 - Re-render only what has changed with help of shallow comparison of virtual DOM
 - Entire DOM interaction is handled by React
 
-### React brings discipline and best practices for DOM interactions
+## React brings discipline and best practices for DOM interactions
 - React sits between application code and DOM
 - All UI interactions go via React in super efficient way (async, batched)
 - ReactDOM can be replaced with React Native/VR to target multi platforms
 - Prioritized, Incremental Rendering with [React Fiber](https://github.com/acdlite/react-fiber-architecture) is a game changer in UI/UX
 
-### Why React? Why is it Awesome?
+## Why React? Why is it Awesome?
 - Radically different way of writing view/client side App
 - Makes views lot more powerful, interesting and irresistable to 'React' to ;-)
 - Everything packed into logical components is easy to reason about and debug
@@ -53,7 +53,7 @@
 - Super Fast and Fun
 - Cut the Crap; Go for Gold
 
-### Look Ma, who all are using React:
+## Look Ma, who all are using React:
 - Facebook, Instagram
 - Netflix
 

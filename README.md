@@ -64,7 +64,7 @@
 //A function taking some input and returning a view.
 //ES5 syntax
 function(input) {
-	return view;
+    return view;
 }
 //ES6/ES2015 syntax
 (input) => view
@@ -73,18 +73,18 @@ function(input) {
 ```js
 //Function returning just a view with no other power:
 ViewComponent = (function() {
-	return <View />
+    return <View />
 })();
 ```
 
 ```js
 //Returning a ViewComponent with lots of powers:
 ViewComponent = React.createClass({
-	render: function() {
-		return <View />
-	}
+    render: function() {
+	    return <View />
+    }
 });
-````
+```
 
 > NOTE: simple function or `render` method is returning a view
 

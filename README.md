@@ -66,6 +66,7 @@
 function(input) {
     return view;
 }
+
 //ES6/ES2015 syntax
 (input) => view
 ```
@@ -81,7 +82,7 @@ ViewComponent = (function() {
 //Returning a ViewComponent with lots of powers:
 ViewComponent = React.createClass({
     render: function() {
-	    return <View />
+        return <View />
     }
 });
 ```
@@ -99,13 +100,13 @@ ViewComponent = React.createClass({
 import React from 'react'
 
 ViewComponent = React.createClass({
-	method: function() {
-		...
-	},
-	...,
-	render: function() {
-		return <View />
-	}
+    method: function() {
+        ...
+    },
+    ...,
+    render: function() {
+        return <View />
+    }
 });
 ```
 
@@ -115,12 +116,12 @@ ViewComponent = React.createClass({
 import React from 'react'
 
 class ViewComponent extends React.Component {
-	method() {
-		...
-	}
-	render() {
-		return <View />
-	}
+    method() {
+        ...
+    }
+    render() {
+        return <View />
+    }
 }
 ```
 
@@ -129,7 +130,7 @@ class ViewComponent extends React.Component {
 
 ```js
 ViewComponent = function() {
-	return <View />
+    return <View />
 };
 ```
 
@@ -167,27 +168,25 @@ touch index.html App.js main.js webpack.config.js
 #### webpack.config.js
 ```js
 module.export = {
-	entry: './main.js',
-	output: {
-		path: './',
-		filename: 'bundle.js'
-	},
-	devServer: {
-		inline: true,
-		port: 3333
-	},
-	module: {
-		loaders: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel',
-				query: {
-					presets: ['es2015', 'react']
-				}
-			}
-		]
-	}
+    entry: './main.js',
+    output: {
+        path: './',
+        filename: 'bundle.js'
+    },
+    devServer: {
+        inline: true,
+        port: 3333
+    },
+    module: {
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel',
+            query: {
+                presets: ['es2015', 'react']
+            }
+        }]
+    }
 }
 ```
 
@@ -195,12 +194,12 @@ module.export = {
 ```html
 <!DOCTYPE html>
 <head>
-	<meta charset="UTF-8">
-	<title>React Training</title>
+    <meta charset="UTF-8">
+    <title>React Training</title>
 </head>
 <body>
-	<div id="app"></div>
-	<script src="bundle.js"></script>
+    <div id="app"></div>
+    <script src="bundle.js"></script>
 </body>
 </html>
 ```
@@ -211,9 +210,9 @@ import React from 'react'
 
 //Component name should start with capital letter
 const App = React.createClass({
-	render: function () {
-		return <h1>My First React Component</h1>
-	}
+    render: function () {
+        return <h1>My First React Component</h1>
+    }
 })
 
 export default App
@@ -231,10 +230,10 @@ ReactDOM.render(<App />, document.getElementById('app'))
 #### Add scripts property in package.json to start webpack dev server
 ```js
 {
-	...
-	"scripts" {
-		"start": "webpack-dev-server"
-	}
+    ...
+    "scripts" {
+        "start": "webpack-dev-server"
+    }
 }
 ```
 
@@ -251,9 +250,9 @@ npm start
 import React from 'react'
 
 class App extends React.Component {
-	render() {
-		return <h1>My First React Component</h1>
-	}
+    render() {
+        return <h1>My First React Component</h1>
+    }
 }
 
 export default App

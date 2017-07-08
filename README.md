@@ -307,9 +307,9 @@ ReactDOM.render(<App header="Dynamic Header"/>, document.getElementById('app'))
 import React from 'react'
 
 const App = React.createClass({
-	render: function () {
-		return <h1>{this.props.header}</h1>
-	}
+    render: function () {
+        return <h1>{this.props.header}</h1>
+    }
 })
 
 export default App
@@ -322,9 +322,9 @@ export default App
 import React from 'react'
 
 class App extends React.Component {
-	render() {
-		return <h1>{this.props.header}</h1>
-	}
+    render() {
+        return <h1>{this.props.header}</h1>
+    }
 }
 
 export default App
@@ -351,14 +351,14 @@ export default App
 import React from 'react'
 
 const App = React.createClass({
-	render: function () {
-		return <h1>{this.props.header}</h1>
-	}
+    render: function () {
+        return <h1>{this.props.header}</h1>
+    }
 })
 
 App.propTypes = {
-	header: React.PropTypes.string.isRequired,
-	body: React.PropTypes.number
+    header: React.PropTypes.string.isRequired,
+    body: React.PropTypes.number
 }
 
 export default App
@@ -375,13 +375,13 @@ export default App
 import React from 'react'
 
 const App = React.createClass({
-	render: function () {
-		return <h1>{this.props.header}</h1>
-	}
+    render: function () {
+        return <h1>{this.props.header}</h1>
+    }
 })
 
 App.defaultProps = {
-	header: 'Default Header'
+    header: 'Default Header'
 }
 
 export default App
@@ -404,14 +404,14 @@ ReactDOM.render(<App header="ToDo App" input="Enter task"/>, document.getElement
 import React from 'react'
 
 const App = React.createClass({
-	render: function () {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input value={this.props.input} />
-			</div>
-		)
-	}
+    render: function () {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input value={this.props.input} />
+            </div>
+        )
+    }
 })
 
 export default App
@@ -444,19 +444,19 @@ ReactDOM.render(<App header="ToDo App" />, document.getElementById('app'))
 import React from 'react'
 
 const App = React.createClass({
-	getInitialState: function() {
-		return {
-			input: 'Enter task'
-		}
-	},
-	render: function () {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input value={this.state.input} />
-			</div>
-		)
-	}
+    getInitialState: function() {
+        return {
+            input: 'Enter task'
+        }
+    },
+    render: function () {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input value={this.state.input} />
+            </div>
+        )
+    }
 })
 
 export default App
@@ -468,27 +468,27 @@ export default App
 import React from 'react'
 
 const App = React.createClass({
-	getInitialState: function() {
-		return {
-			input: 'Enter text'
-		}
-	},
-	onChange: function(e) {
-		this.setState({
-			input: e.target.value
-		})
-	},
-	render: function () {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input
-					value={this.state.input}
-					onChange={this.onChange}
-				/>
-			</div>
-		)
-	}
+    getInitialState: function() {
+        return {
+            input: 'Enter text'
+        }
+    },
+    onChange: function(e) {
+        this.setState({
+            input: e.target.value
+        })
+    },
+    render: function () {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input
+                    value={this.state.input}
+                    onChange={this.onChange}
+                />
+            </div>
+        )
+    }
 })
 
 export default App
@@ -500,27 +500,27 @@ export default App
 import React from 'react'
 
 class App extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			input: 'Enter text'
-		}
-	}
-	onChange(e) {
-		this.setState({ input: e.target.value })
-	}
-	render() {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input
-					value={this.state.input}
-					onChange={this.onChange.bind(this)}
-				/>
-				<h2>{this.state.input}</h2>
-			</div>
-		)
-	}
+    constructor() {
+        super()
+        this.state = {
+            input: 'Enter text'
+        }
+    }
+    onChange(e) {
+        this.setState({ input: e.target.value })
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input
+                    value={this.state.input}
+                    onChange={this.onChange.bind(this)}
+                />
+                <h2>{this.state.input}</h2>
+            </div>
+        )
+    }
 }
 
 export default App
@@ -535,40 +535,40 @@ export default App
 import React from 'react'
 
 class App extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			input: '',
-			tasks: []
-		}
-	}
-	onChange(e) {
-		this.setState({
-			input: e.target.value
-		})
-	}
-	onAddTask() {
-		this.setState({
-			input: '',
-			tasks: [...this.state.tasks, this.state.input]
-		})
-	}
-	render() {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input type="text"
-					placeholder="Enter task"
-					value={this.state.input}
-					onChange={this.onChange.bind(this)} />
-				<button onClick={this.onAddTask.bind(this)}>Add</button>
-				<ul>
-					{this.state.tasks.map((task) =>
-						<li><label><input type="checkbox" /> {task}</label></li>)}
-				</ul>
-			</div>
-		);
-	}
+    constructor() {
+        super()
+        this.state = {
+            input: '',
+            tasks: []
+        }
+    }
+    onChange(e) {
+        this.setState({
+            input: e.target.value
+        })
+    }
+    onAddTask() {
+        this.setState({
+            input: '',
+            tasks: [...this.state.tasks, this.state.input]
+        })
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input type="text"
+                    placeholder="Enter task"
+                    value={this.state.input}
+                    onChange={this.onChange.bind(this)} />
+                <button onClick={this.onAddTask.bind(this)}>Add</button>
+                <ul>
+                    {this.state.tasks.map((task) =>
+                        <li><label><input type="checkbox" /> {task}</label></li>)}
+                </ul>
+            </div>
+        );
+    }
 }
 
 export default App
@@ -580,62 +580,62 @@ export default App
 import React from 'react'
 
 class App extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			input: '',
-			tasks: []
-		}
-	}
-	onChange(e) {
-		this.setState({
-			input: e.target.value
-		})
-	}
-	onAddTask() {
-		this.setState({
-			input: '',
-			tasks: [...this.state.tasks, {text: this.state.input, done: false}]
-		})
-		this.refs.input.focus()
-	}
-	toggleTodo(i) {
-		let tasks = this.state.tasks;
-		tasks[i].done = !tasks[i].done;
-		this.setState({
-			tasks
-		})
-	}
-	componentDidMount() {
-		this.refs.input.focus()
-	}
-	render() {
-		return (
-			<div>
-				<h1>{this.props.header}</h1>
-				<input type="text"
-					placeholder="Enter task"
-					value={this.state.input}
-					ref="input"
-					onChange={this.onChange.bind(this)} />
-				<button onClick={this.onAddTask.bind(this)}>Add</button>
-				<ul>
-					{this.state.tasks.map((task, i) =>
-						<li>
-							<label>
-								<input type="checkbox"
-									checked={task.done}
-									onClick={this.toggleTodo.bind(this, i)}/>
-								<span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
-									{task.text}
-								</span>
-							</label>
-						</li>)
-					}
-				</ul>
-			</div>
-		);
-	}
+    constructor() {
+        super()
+        this.state = {
+            input: '',
+            tasks: []
+        }
+    }
+    onChange(e) {
+        this.setState({
+            input: e.target.value
+        })
+    }
+    onAddTask() {
+        this.setState({
+            input: '',
+            tasks: [...this.state.tasks, {text: this.state.input, done: false}]
+        })
+        this.refs.input.focus()
+    }
+    toggleTodo(i) {
+        let tasks = this.state.tasks;
+        tasks[i].done = !tasks[i].done;
+        this.setState({
+            tasks
+        })
+    }
+    componentDidMount() {
+        this.refs.input.focus()
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.props.header}</h1>
+                <input type="text"
+                    placeholder="Enter task"
+                    value={this.state.input}
+                    ref="input"
+                    onChange={this.onChange.bind(this)} />
+                <button onClick={this.onAddTask.bind(this)}>Add</button>
+                <ul>
+                    {this.state.tasks.map((task, i) =>
+                        <li>
+                            <label>
+                                <input type="checkbox"
+                                checked={task.done}
+                                onClick={this.toggleTodo.bind(this, i)}/>
+                                <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
+                                    {task.text}
+                                </span>
+                            </label>
+                        </li>)
+                    }
+                </ul>
+            </div>
+        );
+    }
 }
 
 export default App
@@ -651,9 +651,9 @@ export default App
 import React from 'react'
 
 class App extends React.Component {
-	render() {
-		return <Button>I <Heart /> React</Button>
-	}
+    render() {
+        return <Button>I <Heart /> React</Button>
+    }
 }
 
 const Button = (props) => <button>{props.children}</button>

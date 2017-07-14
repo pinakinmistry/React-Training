@@ -18,7 +18,7 @@
 - Doesn't cover anything other than view, not even model or routing
 - Controller ??? (Component controls itself)
 - It outsources client side routing to npm package `react-router`
-- It outsources model/state management to npm packages like `react-redux`, `flux`, etc.
+- It outsources model/state management to npm packages like `react-redux`, `mobx`, etc.
 
 ## MVC in View is not appropriate
 - MVC works well in overall client server model wherein View is the client/frontend
@@ -60,15 +60,20 @@
 > 2 names are enough
 
 ## Functional View (Function returning a view)
+
 ```js
-//A function taking some input and returning a view.
+view = f(props, state)
+```
+
+```js
+//A function taking some input via props and returning a view.
 //ES5 syntax
-function(input) {
+function(props) {
     return view;
 }
 
 //ES6/ES2015 syntax
-(input) => view
+(props) => view
 ```
 
 ```js
@@ -90,9 +95,11 @@ ViewComponent = React.createClass({
 > NOTE: simple function or `render` method is returning a view
 
 ## 3 Ways of Creating React Components:
-- Classical way (ES5 way)
-- Classy way (ES6 way)
-- Functional way (Stateless Components)
+- Classical / ES5 way (older React versions)
+- Classy / ES6 way (more popular now)
+- Functional /Stateless Functional way (From R v0.14)
+
+> Use functional way as much as possible
 
 ### Classical way example
 
@@ -125,7 +132,6 @@ class ViewComponent extends React.Component {
 }
 ```
 
-
 ### Functional way example
 
 ```js
@@ -136,7 +142,11 @@ ViewComponent = function() {
 
 > NOTE: Once again, simple function or `render` method returns a view
 
+# Let's get our hands dirty
+
 ## Dev Environment Setup
+
+> TODO: create-react-app coming soon
 
 We need below NPM packages:
 - react
@@ -288,6 +298,7 @@ const App = () => React.createElement('h1', props, 'React Node/Element')
 ```
 
 ## Hardcoded Components No Fun - Pass Data and Actions using `props`
+- Hardcoing is evil
 - Nothing should be set in stone
 - Pass data/actions as properties on component just like normal HTML attributes
 - The passed properties are accessible in `this.props` inside of component
@@ -345,7 +356,7 @@ export default App
 
 ## What if `props` are not passed?
 
-###Props Validation
+### Props Validation
 #### App.js
 ```js
 import React from 'react'
@@ -364,7 +375,7 @@ App.propTypes = {
 export default App
 ```
 
-#### PropTypes that can be validated:
+#### TODO: PropTypes that can be validated:
 ```js
 ```
 > NOTE: props validation is done in same way in Classical, Classy and Functional Components
@@ -386,7 +397,7 @@ App.defaultProps = {
 
 export default App
 ```
-> NOTE: props validation is done in same way in Classical, Classy and Functional Components
+> NOTE: Default props are set in same way in Classical, Classy and Functional Components
 
 ## Handling User Input
 
@@ -526,7 +537,7 @@ class App extends React.Component {
 export default App
 ```
 
-## `state` vs `props`
+## TODO: `state` vs `props`
 
 # ToDo App Implementation
 
@@ -563,8 +574,15 @@ class App extends React.Component {
                     onChange={this.onChange.bind(this)} />
                 <button onClick={this.onAddTask.bind(this)}>Add</button>
                 <ul>
-                    {this.state.tasks.map((task) =>
-                        <li><label><input type="checkbox" /> {task}</label></li>)}
+                    {
+                        this.state.tasks.map((task) =>
+                            <li>
+                                <label>
+                                    <input type="checkbox" /> {task}
+                                </label>
+                            </li>
+                        )
+                    }
                 </ul>
             </div>
         );
@@ -620,17 +638,19 @@ class App extends React.Component {
                     onChange={this.onChange.bind(this)} />
                 <button onClick={this.onAddTask.bind(this)}>Add</button>
                 <ul>
-                    {this.state.tasks.map((task, i) =>
-                        <li>
-                            <label>
-                                <input type="checkbox"
-                                checked={task.done}
-                                onClick={this.toggleTodo.bind(this, i)}/>
-                                <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
-                                    {task.text}
-                                </span>
-                            </label>
-                        </li>)
+                    {
+                        this.state.tasks.map((task, i) =>
+                            <li>
+                                <label>
+                                    <input type="checkbox"
+                                    checked={task.done}
+                                    onClick={this.toggleTodo.bind(this, i)}/>
+                                    <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
+                                        {task.text}
+                                    </span>
+                                </label>
+                            </li>
+                        )
                     }
                 </ul>
             </div>
@@ -663,11 +683,7 @@ const Heart = () => <span>&heart;</span>
 export default App
 ```
 
-
-
-# Component Life Cycle
-
-
+# TODO: Component Life Cycle
 
 # Client Side Routing using `react-router` npm package
 - `react-router` gives JSX styled syntax for defining client side routes in a span
@@ -743,30 +759,30 @@ class App extends React.Component {
         }
 
         return (
-        <div>
-            <h1>{this.props.header}</h1>
-            <input type="text"
-                placeholder="Enter task"
-                value={this.state.input}
-                ref="input"
-                onChange={this.onChange.bind(this)} />
-            <button onClick={this.onAddTask.bind(this)}>Add</button>
-            <ul>
-                {visibleTasks.map((task, i) =>
-                    <li key={i}>
-                        <label>
-                            <input type="checkbox"
-                            checked={task.done}
-                            onClick={this.toggleTodo.bind(this, i)}/>
-                            <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
-                                {task.text}
-                            </span>
-                        </label>
-                    </li>)
-                }
-            </ul>
-            <Links />
-        </div>
+            <div>
+                <h1>{this.props.header}</h1>
+                <input type="text"
+                    placeholder="Enter task"
+                    value={this.state.input}
+                    ref="input"
+                    onChange={this.onChange.bind(this)} />
+                <button onClick={this.onAddTask.bind(this)}>Add</button>
+                <ul>
+                    {visibleTasks.map((task, i) =>
+                        <li key={i}>
+                            <label>
+                                <input type="checkbox"
+                                checked={task.done}
+                                onClick={this.toggleTodo.bind(this, i)}/>
+                                <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
+                                    {task.text}
+                                </span>
+                            </label>
+                        </li>)
+                    }
+                </ul>
+                <Links />
+            </div>
         );
     }
 }

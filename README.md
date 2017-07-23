@@ -434,7 +434,7 @@ export default App
 - Change in value should go through `render` method
 - But props can't change
 
-##Let's use `state` to handle change
+## Let's use `state` to handle change
 - Component can have its own data in `state` property
 - Component gets its state using `getInitialState` method
 - state can undergo changes but can't be mutated (Once set, can't be reassigned later)
@@ -594,7 +594,7 @@ export default App
 ## Toggle task as done/not done
 
 #### App.js
-```js
+```diff
 import React from 'react'
 
 class App extends React.Component {
@@ -613,17 +613,18 @@ class App extends React.Component {
     onAddTask() {
         this.setState({
             input: '',
-            tasks: [...this.state.tasks, {text: this.state.input, done: false}]
+-           tasks: [...this.state.tasks, this.state.input]
++           tasks: [...this.state.tasks, {text: this.state.input, done: false}]
         })
         this.refs.input.focus()
     }
-    toggleTodo(i) {
-        let tasks = this.state.tasks;
-        tasks[i].done = !tasks[i].done;
-        this.setState({
-            tasks
-        })
-    }
++   toggleTodo(i) {
++       let tasks = this.state.tasks;
++       tasks[i].done = !tasks[i].done;
++       this.setState({
++           tasks
++       })
++   }
     componentDidMount() {
         this.refs.input.focus()
     }
@@ -639,18 +640,20 @@ class App extends React.Component {
                 <button onClick={this.onAddTask.bind(this)}>Add</button>
                 <ul>
                     {
-                        this.state.tasks.map((task, i) =>
-                            <li>
-                                <label>
-                                    <input type="checkbox"
-                                    checked={task.done}
-                                    onClick={this.toggleTodo.bind(this, i)}/>
-                                    <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
-                                        {task.text}
-                                    </span>
-                                </label>
-                            </li>
-                        )
+-                       this.state.tasks.map((task) =>
+-                           <li><label><input type="checkbox" /> {task}</label></li>)}
++                       this.state.tasks.map((task, i) =>
++                           <li>
++                               <label>
++                                   <input type="checkbox"
++                                   checked={task.done}
++                                   onClick={this.toggleTodo.bind(this, i)}/>
++                                   <span style={{textDecoration: task.done ? 'line-through' : 'none'}}>
++                                       {task.text}
++                                   </span>
++                               </label>
++                           </li>
++                       )
                     }
                 </ul>
             </div>

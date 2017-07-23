@@ -594,7 +594,7 @@ export default App
 ## Toggle task as done/not done
 
 #### App.js
-```javascript.diff
+```js.patch
 import React from 'react'
 
 class App extends React.Component {

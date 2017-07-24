@@ -594,7 +594,8 @@ export default App
 ## Toggle task as done/not done
 
 #### App.js
-```javascript.patch
+```javascript
+```diff
 import React from 'react'
 
 class App extends React.Component {
@@ -3986,4 +3987,5 @@ const createList = (filter) => {
         }
     }
 ...
+```
 ```
